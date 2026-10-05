@@ -27,7 +27,6 @@ const SESSIONS = [
       { href: "#part5", label: "05 시각화·보고서" },
       { href: "#funcs", label: "함수 카드" },
       { href: "#wrap", label: "마무리" },
-      { href: "#appendix", label: "부록" },
     ],
   },
 ];

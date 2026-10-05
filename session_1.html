@@ -268,7 +268,7 @@
 
       <h3>1-5. Excel에서 검증하기: 필터 목록 활용 <span class="slide-no">실습 · 02 시트 · 필터로 보기만 (수정 금지)</span></h3>
       <p><b>지점명 ▼ (예시 화면)</b></p>
-      <pre class="formula">(모두 선택)
+      <pre class="formula plain">(모두 선택)
 3월 소계
 4월 소계
 메모
@@ -444,7 +444,8 @@
       <pre class="formula">=IF(A6*B6=C6,"정상","검토필요")</pre>
 
       <h3>2-6. 05에 적용했더니… 함정 발견! <span class="slide-no">실습 · 05 시트 · N열 매출검증 채우기</span></h3>
-      <pre class="formula">=IF(F2*G2=H2,"정상","검토필요")      ← 05 시트 N2에 입력 후 아래로 채우기</pre>
+      <pre class="formula">=IF(F2*G2=H2,"정상","검토필요")</pre>
+      <p class="muted">← 05 시트 N2에 입력 후 아래로 채우기</p>
       <table class="table">
         <thead><tr><th>행</th><th>상황</th><th>결과</th></tr></thead>
         <tbody>
@@ -532,7 +533,7 @@
       <pre class="formula">=XLOOKUP(A20,'03_상품Master'!$A$2:$A$11,'03_상품Master'!$C$2:$C$11,"확인필요")</pre>
 
       <h3>2-9. XLOOKUP 수식 해부</h3>
-      <pre class="formula">=XLOOKUP(  ①  ,  ②  ,  ③  ,  ④  )</pre>
+      <pre class="formula plain">=XLOOKUP(  ①  ,  ②  ,  ③  ,  ④  )</pre>
       <table class="table">
         <thead><tr><th>위치</th><th>의미</th><th>예</th></tr></thead>
         <tbody>
@@ -1220,27 +1221,6 @@ Excel 2021 피벗테이블의
       </div>
       <p><b>AI가 알려준다 → 내가 실행한다 → 내가 검증한다</b></p>
       <p>Q &amp; A · Thank you</p>
-    </section>
-
-    <!-- ===================== 부록 (슬라이드 64~66) ===================== -->
-    <section class="card" id="appendix">
-      <h2><span class="num">+</span>부록 · 강사 참고</h2>
-      <p class="lead">강의안 설명 캡처 (원래 슬라이드 번호 기준)</p>
-
-      <h3>미션 1 정답표 캡처 <span class="slide-no">원래 13번 슬라이드</span></h3>
-      <figure class="fig">
-        <img src="img/appendix1_mission1.png" alt="미션 1 비교표 정답 캡처" loading="lazy">
-      </figure>
-
-      <h3>오류 코드 시연 설명 캡처 <span class="slide-no">원래 24번 슬라이드</span></h3>
-      <figure class="fig">
-        <img src="img/appendix2_error_demo.png" alt="오류 코드 교정 시연 설명 캡처" loading="lazy">
-      </figure>
-
-      <h3>중복 찾기 설명 캡처 <span class="slide-no">원래 25번 슬라이드</span></h3>
-      <figure class="fig">
-        <img src="img/appendix3_duplicate.png" alt="텍스트 정리·중복 찾기 설명 캡처" loading="lazy">
-      </figure>
     </section>
 
   </div>

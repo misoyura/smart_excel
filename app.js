@@ -78,6 +78,7 @@ function initSessionPage(currentId){
   if (eyebrow) eyebrow.textContent = `${currentId}차시 · 강사 ${COURSE.instructor}`;
 
   renderNav(currentId);
+  enhanceFormulas();
 
   const footer = document.getElementById('site-footer');
   if (footer) footer.innerHTML = `
@@ -100,4 +101,43 @@ function initIndexPage(){
     <div class="wrap">
       <strong>${COURSE.name}</strong> · 강사 ${COURSE.instructor} &nbsp;|&nbsp; © ${COURSE.year}
     </div>`;
+}
+
+// 수식 복사: pre.formula(설명용 .plain 제외)와 "="로 시작하는 표 안 수식(span.f)에 복사 버튼을 붙인다.
+// Excel 셀에 그대로 붙도록 줄바꿈은 제거하고 한 줄로 복사한다.
+function copyText(text, btn){
+  const onSuccess = () => {
+    btn.textContent = '✓';btn.classList.add('done');
+    const toast = document.getElementById('toast');if (toast) toast.classList.add('show');
+    setTimeout(() => {btn.textContent='복사';btn.classList.remove('done');if (toast) toast.classList.remove('show');},1500);
+  };
+  const fallbackCopy = () => {
+    const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+    document.body.appendChild(ta);ta.select();
+    try{document.execCommand('copy');onSuccess();}catch(e){alert('복사에 실패했습니다. 직접 선택해 복사해 주세요.');}
+    document.body.removeChild(ta);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(onSuccess).catch(fallbackCopy);
+  } else { fallbackCopy(); }
+}
+
+function enhanceFormulas(){
+  const formulaText = el => el.textContent.replace(/\r?\n/g, '').trim();
+  const makeBtn = el => {
+    const btn = document.createElement('button');
+    btn.className = 'f-copy';btn.type = 'button';btn.textContent = '복사';btn.title = '수식 복사';
+    btn.addEventListener('click', () => copyText(formulaText(el), btn));
+    return btn;
+  };
+  document.querySelectorAll('pre.formula:not(.plain)').forEach(pre => {
+    const box = document.createElement('div');
+    box.className = 'formula-box';
+    pre.parentNode.insertBefore(box, pre);
+    box.appendChild(pre);
+    box.appendChild(makeBtn(pre));
+  });
+  document.querySelectorAll('span.f').forEach(span => {
+    if (span.textContent.trim().startsWith('=')) span.after(makeBtn(span));
+  });
 }
