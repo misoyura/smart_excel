@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChatGPT와 함께하는 스마트 엑셀 · 강의 자료실</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="page-index">
+
+<div class="statusbar"></div>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="logo"></span>
+    <h1>ChatGPT와 함께하는 스마트 엑셀</h1>
+    <p>AI에게 묻고, Excel에서 실행하고, 결과를 검증하다</p>
+    <p class="meta"></p>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <section id="sessions">
+      <div class="sec-title">
+        <span class="dot"></span>
+        <h2>강의 목차</h2>
+        <span class="hint">카드를 누르면 해당 차시로 이동</span>
+      </div>
+
+      <!-- 차시 추가 방법: data.js의 SESSIONS 배열에 항목을 추가하면 이 카드 목록에 자동 반영됩니다. -->
+      <div class="grid" id="session-grid"></div>
+    </section>
+
+    <section id="downloads">
+      <div class="sec-title">
+        <span class="dot"></span>
+        <h2>실습자료 다운로드</h2>
+      </div>
+
+      <div class="dl-group">
+        <div class="dl-row">
+          <span class="fname">🗂 실습 파일 · AI_스마트엑셀_학생용_실습데이터.xlsx</span>
+          <a class="dl-btn" href="files/smart_excel_practice.xlsx" download="AI_스마트엑셀_학생용_실습데이터.xlsx">다운로드</a>
+        </div>
+        <div class="dl-row">
+          <span class="fname">✅ 결과물 · 결과물_AI_스마트엑셀_학생용_실습데이터_최종_답안.xlsx</span>
+          <a class="dl-btn" href="files/smart_excel_answer.xlsx" download="결과물_AI_스마트엑셀_학생용_실습데이터_최종_답안.xlsx">다운로드</a>
+        </div>
+      </div>
+
+      <p class="notice">※ 실습은 학생용 실습데이터 파일로 진행하고, 결과물(최종 답안) 파일은 실습 후 내 결과와 비교할 때 사용하세요.</p>
+    </section>
+
+  </div>
+</main>
+
+<footer id="site-footer"></footer>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+<script>initIndexPage();</script>
+
+</body>
+</html>

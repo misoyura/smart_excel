@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1차시 · ChatGPT와 함께하는 스마트 엑셀 · 신구대학교 재학생 특강</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="page-session">
+
+<div class="statusbar"></div>
+
+<header class="header">
+  <div class="wrap">
+    <span class="logo"></span>
+    <p class="eyebrow"></p>
+    <h1>ChatGPT와 함께하는 스마트 엑셀</h1>
+    <p class="subtitle">AI에게 묻고, Excel에서 실행하고, 결과를 검증하다</p>
+    <span class="guide">💡 실습 프롬프트는 복사 버튼으로 붙여넣으세요</span>
+  </div>
+</header>
+
+<nav class="nav" id="site-nav"></nav>
+
+<main>
+  <div class="wrap">
+
+    <!-- ===================== 오늘의 흐름 (슬라이드 1~2) ===================== -->
+    <section class="card" id="flow">
+      <h2><span class="num">00</span>오늘의 흐름</h2>
+      <p class="lead">신구대학교 재학생 특강 · AI에게 묻고, Excel에서 실행하고, 결과를 검증하다</p>
+
+      <h3>Table of Contents</h3>
+      <table class="table">
+        <thead><tr><th>PART</th><th>내용</th><th>시간</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1</strong></td><td>AI로 데이터 문제 진단</td><td>20분</td></tr>
+          <tr><td><strong>2</strong></td><td>AI 수식 생성·검증</td><td>40분</td></tr>
+          <tr><td><strong>3</strong></td><td>데이터 정제 및 구조 표준화</td><td>30분</td></tr>
+          <tr><td><strong>4</strong></td><td>매출 분석 &amp; 피벗테이블</td><td>20분</td></tr>
+          <tr><td><strong>5</strong></td><td>시각화 &amp; 요약 보고서</td><td>15분</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ===================== 실습자료 ===================== -->
+    <section class="card" id="materials">
+      <h2><span class="num">📂</span>실습자료</h2>
+      <p class="lead">수업 시작 전에 실습 파일을 내려받아 열어 두세요.</p>
+
+      <div class="dl-group">
+        <div class="dl-row">
+          <span class="fname">🗂 실습 파일 · AI_스마트엑셀_학생용_실습데이터.xlsx</span>
+          <a class="dl-btn" href="files/smart_excel_practice.xlsx" download="AI_스마트엑셀_학생용_실습데이터.xlsx">다운로드</a>
+        </div>
+        <div class="dl-row">
+          <span class="fname">✅ 결과물 · 결과물_AI_스마트엑셀_학생용_실습데이터_최종_답안.xlsx</span>
+          <a class="dl-btn" href="files/smart_excel_answer.xlsx" download="결과물_AI_스마트엑셀_학생용_실습데이터_최종_답안.xlsx">다운로드</a>
+        </div>
+      </div>
+
+      <p class="muted">두 파일 모두 시트 구성은 같습니다: 01_실습안내 · 02_매출원본 · 03_상품Master · 04_지점Master · 05_정제데이터 · 06_피벗분석 · 07_대시보드 · 08_AI보고서 · 09_함수테스트 · 10_확인필요</p>
+      <div class="box tip">
+        <span class="box-title">💡 사용 방법</span>
+        실습은 <b>학생용 실습데이터</b> 파일로 진행합니다. <b>결과물(최종 답안)</b> 파일은 실습을 마친 뒤 내 결과와 비교할 때 사용하세요.
+      </div>
+    </section>
+
+    <!-- ===================== OPENING (슬라이드 3~7) ===================== -->
+    <section class="card" id="opening">
+      <h2><span class="num">00</span>OPENING · 오프닝</h2>
+      <p class="lead">AI가 알려준다 → 내가 실행한다 → 내가 검증한다</p>
+
+      <h3>이 데이터, 믿어도 될까요?</h3>
+      <p class="muted">실습 파일 「02_매출원본」에 실제로 들어 있는 데이터입니다</p>
+      <p><b>질문 ① 세 값은 같은 지점일까요?</b></p>
+      <table class="table">
+        <thead><tr><th>행</th><th>지점명</th></tr></thead>
+        <tbody>
+          <tr><td>3행</td><td>성남점</td></tr>
+          <tr><td>12행</td><td>성남 점</td></tr>
+          <tr><td>28행</td><td>성남지점</td></tr>
+        </tbody>
+      </table>
+      <p><b>질문 ② 이 매출액은 맞을까요?</b> (141행)</p>
+      <table class="table">
+        <thead><tr><th>수량</th><th>판매단가</th><th>매출액</th></tr></thead>
+        <tbody>
+          <tr><td>3</td><td>4,500</td><td>14,000</td></tr>
+        </tbody>
+      </table>
+      <div class="box note">
+        <span class="box-title">📌 핵심</span>
+        사람 눈에는 같아 보여도, Excel은 전혀 다르게 계산합니다
+      </div>
+
+      <h3>오늘의 흐름과 최종 결과물</h3>
+      <p><b>문제 발견 → AI에게 질문 → Excel에서 실행 → 결과 검증 → 분석 → 보고서</b></p>
+      <p>150분 뒤 여러분 손에 남는 4가지</p>
+      <table class="table">
+        <thead><tr><th>#</th><th>결과물</th><th>시트</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1</strong></td><td>정제 데이터</td><td>05_정제데이터</td></tr>
+          <tr><td><strong>2</strong></td><td>피벗 분석</td><td>06_피벗분석</td></tr>
+          <tr><td><strong>3</strong></td><td>차트</td><td>07_대시보드</td></tr>
+          <tr><td><strong>4</strong></td><td>1페이지 보고서</td><td>08_AI보고서</td></tr>
+        </tbody>
+      </table>
+
+      <h3>역할을 나누면 헷갈리지 않습니다</h3>
+      <p class="muted">실습 슬라이드 오른쪽 위의 배지를 보면 지금 누가 무엇을 하는지 알 수 있습니다</p>
+      <table class="table">
+        <thead><tr><th>역할</th><th>하는 일</th></tr></thead>
+        <tbody>
+          <tr><td><strong>AI</strong></td><td>후보를 찾고 / 방법·수식을 제안하고 / 초안을 쓴다</td></tr>
+          <tr><td><strong>학생</strong></td><td>선택하고, 적용하고 / 검증하고 / 최종 판단한다</td></tr>
+          <tr><td><strong>Excel</strong></td><td>실제로 계산한다 (모든 숫자의 근거)</td></tr>
+          <tr><td><strong>강사</strong></td><td>기준을 제시하고 / 막힌 곳을 푼다</td></tr>
+        </tbody>
+      </table>
+      <div class="box note">
+        <span class="box-title">📌 원칙</span>
+        AI가 알려준다 → 내가 실행한다 → 내가 검증한다
+      </div>
+
+      <h3>오늘 만날 함수 지도</h3>
+      <p class="muted">외우지 않아도 됩니다 — 수식은 AI가 알려주고, 우리는 "이 함수가 무슨 일을 하는지"만 압니다</p>
+      <table class="table">
+        <thead><tr><th>그룹</th><th>역할</th><th>함수</th><th>오늘 쓰는 곳</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1 판정하기</strong></td><td>맞는지 틀린지 가린다</td><td>IF · COUNT · ISNUMBER · OR · NOT</td><td>매출 검증 · 조건부 서식</td></tr>
+          <tr><td><strong>2 찾아오기</strong></td><td>기준표에서 정답을 가져온다</td><td>XLOOKUP · COUNTIF</td><td>상품분류 · 지점명 · 중복</td></tr>
+          <tr><td><strong>3 정리하기</strong></td><td>지저분한 글자를 고친다</td><td>SUBSTITUTE · TRIM · TEXTJOIN · DATEVALUE · IFERROR</td><td>공백 제거 · 날짜 변환</td></tr>
+          <tr><td><strong>4 합계 내기</strong></td><td>조건 맞는 것만 더한다</td><td>SUMIFS · DATE</td><td>3월 신구점 매출</td></tr>
+        </tbody>
+      </table>
+      <div class="box tip">
+        <span class="box-title">💡 주인공은 4개 — IF · XLOOKUP · COUNTIF · SUMIFS</span>
+        나머지는 이 4개를 돕는 조연입니다
+      </div>
+
+      <h3>실습 파일 살펴보기</h3>
+      <p class="muted">AI_스마트엑셀_학생용_실습데이터.xlsx (위 <a href="#materials">실습자료</a>에서 다운로드)</p>
+      <table class="table">
+        <thead><tr><th>시트</th><th>용도</th><th>사용 시점</th></tr></thead>
+        <tbody>
+          <tr><td><strong>01_실습안내</strong></td><td>미션 안내</td><td>시작</td></tr>
+          <tr><td><strong>02_매출원본</strong></td><td>원본 데이터 300행</td><td>진단 (수정 금지)</td></tr>
+          <tr><td><strong>03_상품Master</strong></td><td>상품 기준정보 10개</td><td>조회</td></tr>
+          <tr><td><strong>04_지점Master</strong></td><td>지점 기준정보 3개</td><td>조회</td></tr>
+          <tr><td><strong>05_정제데이터</strong></td><td>작업·정제 공간</td><td>PART 02~03</td></tr>
+          <tr><td><strong>06_피벗분석</strong></td><td>피벗테이블</td><td>PART 04</td></tr>
+          <tr><td><strong>07_대시보드</strong></td><td>차트</td><td>PART 05</td></tr>
+          <tr><td><strong>08_AI보고서</strong></td><td>요약 보고서</td><td>PART 05</td></tr>
+          <tr><td><strong>09_함수테스트</strong></td><td>수식 연습</td><td>PART 01~02</td></tr>
+          <tr><td><strong>10_확인필요</strong></td><td>분석 제외 행 기록</td><td>PART 03 (강사 시연)</td></tr>
+        </tbody>
+      </table>
+      <div class="box warn">
+        <span class="box-title">⚠ 주의</span>
+        02_매출원본은 절대 수정하지 않습니다 → 05에 복사해서 작업
+      </div>
+      <p><b>시작 전 확인</b></p>
+      <ul>
+        <li>☐ 실습 파일 열기</li>
+        <li>☐ ChatGPT 로그인</li>
+        <li>☐ 파일 업로드 버튼 확인</li>
+      </ul>
+      <div class="box warn">
+        <span class="box-title">⚠ 개인정보</span>
+        회사 데이터를 AI에 올릴 때는 이름 등 개인정보를 지우고 회사 규정을 먼저 확인합니다
+      </div>
+    </section>
+
+    <!-- ===================== PART 01 (슬라이드 8~15) ===================== -->
+    <section class="card" id="part1">
+      <h2><span class="num">01</span>AI로 데이터 문제 진단</h2>
+      <p class="lead">미션 1 │ 분석하기 전에, 데이터부터 점검한다</p>
+
+      <table class="table">
+        <tbody>
+          <tr><td><strong>상황</strong></td><td>카페 3개 지점 3개월 매출 분석 담당자</td></tr>
+          <tr><td><strong>목표</strong></td><td>AI가 찾은 문제를 Excel에서 직접 확인</td></tr>
+          <tr><td><strong>시간</strong></td><td>20분</td></tr>
+        </tbody>
+      </table>
+
+      <h3>1-1. 먼저 사람 눈으로 10행 점검하기 <span class="slide-no">실습 3분 · 09 시트 · G46:G55에 적기</span></h3>
+      <p><b>학생</b> 09 시트 45~55행에서 문제 찾기 &nbsp;|&nbsp; <b>AI</b> 아직 사용하지 않음</p>
+      <table class="table">
+        <thead><tr><th>주문일자</th><th>지점명</th><th>판매단가</th><th>매출액</th></tr></thead>
+        <tbody>
+          <tr><td>2026-03-05</td><td>신구점</td><td>3000</td><td>6000</td></tr>
+          <tr><td>2026/03/08</td><td>신구 점</td><td>4000</td><td>4000</td></tr>
+          <tr><td>2026.03.12</td><td>성남점</td><td>"4,500"</td><td>9000</td></tr>
+          <tr><td>2026-03-15</td><td>성남지점</td><td>4800</td><td>4800</td></tr>
+          <tr><td>2026-04-07</td><td>용인점</td><td>4500</td><td>"9,000"</td></tr>
+        </tbody>
+      </table>
+      <p class="muted">※ 블록 ④ 일부 발췌 — 전체 10행은 실습 파일에서 확인</p>
+      <ol class="steps">
+        <li><b>이렇게 하세요</b><span>「09_함수테스트」 블록 ④ — 찾은 문제를 G열에 적기</span></li>
+        <li><b>찾을 것</b><span>날짜 형식 · 지점명 표기 / 숫자/텍스트 · 계산 오류</span></li>
+      </ol>
+      <div class="box tip">
+        <span class="box-title">💡 10행도 이만큼 걸렸다면?</span>
+        → 300행은 AI에게 1차 진단을 맡겨 봅시다
+      </div>
+
+      <h3>1-2. 좋은 프롬프트의 5요소</h3>
+      <p class="muted">AI는 우리 파일을 모릅니다. 구조를 알려줄수록 정확해집니다.</p>
+      <table class="table">
+        <thead><tr><th>#</th><th>요소</th><th>내용</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><strong>역할</strong></td><td>"너는 데이터 분석 전문가야"</td></tr>
+          <tr><td>2</td><td><strong>대상</strong></td><td>파일 · 시트 · 열 구조</td></tr>
+          <tr><td>3</td><td><strong>관점</strong></td><td>무엇을 찾을지 번호로 나열</td></tr>
+          <tr><td>4</td><td><strong>출력 형식</strong></td><td>표 형식, 열 이름 지정</td></tr>
+          <tr><td>5</td><td><strong>제약</strong></td><td>"실제 데이터만, 추측하지 마"</td></tr>
+        </tbody>
+      </table>
+      <div class="box note">
+        <span class="box-title">📌 핵심</span>
+        특히 대상(데이터 구조)과 제약(추측 금지)이 답변 품질을 가장 크게 바꿉니다
+      </div>
+
+      <h3>1-3. AI에게 데이터 진단 맡기기 <span class="slide-no">Level 1 · 그대로 복사</span></h3>
+      <div class="prompt">
+        <div class="prompt-head">
+          <span class="label">PROMPT · 데이터 진단 (Level 1 · 그대로 복사)</span>
+          <button class="copy-btn" onclick="copyPrompt(this)">복사</button>
+        </div>
+        <pre>너는 Excel 데이터 품질을 점검하는 데이터 분석 전문가야.
+첨부한 파일의 「02_매출원본」 시트를 분석해줘.
+열 구성: 주문일자, 지점코드, 지점명, 상품코드, 상품명, 수량,
+판매단가, 매출액, 결제수단, 담당자, 주문상태, 비고
+기준정보: 「03_상품Master」, 「04_지점Master」
+다음 관점에서 문제를 찾아줘.
+1. 빈 셀    2. 같은 의미인데 표기가 다른 값    3. 날짜 형식 불일치
+4. 텍스트로 입력된 숫자    5. 완전히 같은 중복 행
+6. 분석에 불필요한 행(소계, 메모)    7. 기준정보에 없는 코드
+8. 수량×판매단가 ≠ 매출액인 행
+표 형식: 문제 유형 | 해당 열 | Excel 행 번호 | 예시 값 | 처리 방법
+실제 데이터에서 확인되는 것만 쓰고 추측하지 마.</pre>
+      </div>
+      <table class="table">
+        <thead><tr><th>학생</th><th>AI</th></tr></thead>
+        <tbody>
+          <tr><td>1. 파일 업로드</td><td>1. 파일 읽기</td></tr>
+          <tr><td>2. 프롬프트 붙여넣기</td><td>2. 문제 유형 분류</td></tr>
+          <tr><td>3. 전송</td><td>3. 표로 정리</td></tr>
+        </tbody>
+      </table>
+
+      <h3>1-4. AI 답변은 "정답 후보"입니다</h3>
+      <table class="table">
+        <thead><tr><th>!</th><th>이유</th></tr></thead>
+        <tbody>
+          <tr><td><strong>행 번호가 1~2칸 어긋날 수 있다</strong></td><td>AI가 제목 행을 빼고 세는 경우가 있음</td></tr>
+          <tr><td><strong>놓치거나, 없는 문제를 말할 수 있다</strong></td><td>"전부 찾았다"고 확신하면 안 됨</td></tr>
+          <tr><td><strong>텍스트 날짜를 "문제없음"이라 할 수 있다</strong></td><td>AI가 읽으면서 자동 변환하는 경우</td></tr>
+        </tbody>
+      </table>
+      <div class="box warn">
+        <span class="box-title">⚠ 그래서</span>
+        다음 단계는 반드시 Excel에서 직접 확인합니다
+      </div>
+
+      <h3>1-5. Excel에서 검증하기: 필터 목록 활용 <span class="slide-no">실습 · 02 시트 · 필터로 보기만 (수정 금지)</span></h3>
+      <p><b>지점명 ▼ (예시 화면)</b></p>
+      <pre class="formula">(모두 선택)
+3월 소계
+4월 소계
+메모
+성남 점
+성남점
+성남지점
+신구 점
+신구점
+용인 점
+용인점
+용인지점
+(필드 값 없음)</pre>
+      <ol class="steps">
+        <li><b>데이터 탭 → 필터</b><span>(Ctrl + Shift + L)</span></li>
+        <li><b>지점명 ▼ 클릭</b></li>
+        <li><b>목록에서 이상한 값 찾기</b></li>
+        <li><b>상품명 · 상품코드 · 주문상태도 확인</b></li>
+      </ol>
+      <div class="box note">
+        <span class="box-title">📌 필터 목록 = 그 열의 고유값 목록</span>
+        사람에게 같은 의미 ≠ Excel에서 같은 값
+      </div>
+
+      <h3>1-6. 미션 1 완료: AI 발견 vs 내 확인 <span class="slide-no">작성</span></h3>
+      <table class="table">
+        <thead><tr><th>문제 유형</th><th>AI가 찾았나</th><th>Excel에서 확인</th><th>건수</th></tr></thead>
+        <tbody>
+          <tr><td>소계/메모 행</td><td></td><td></td><td></td></tr>
+          <tr><td>중복 행</td><td></td><td></td><td></td></tr>
+          <tr><td>지점명 표기</td><td></td><td></td><td></td></tr>
+          <tr><td>상품명 표기</td><td></td><td></td><td></td></tr>
+          <tr><td>상품코드 오류</td><td></td><td></td><td></td></tr>
+          <tr><td>날짜 형식</td><td></td><td></td><td></td></tr>
+          <tr><td>텍스트 숫자</td><td></td><td></td><td></td></tr>
+          <tr><td>매출액 불일치</td><td></td><td></td><td></td></tr>
+          <tr><td>빈 셀</td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+      <p><b>함께 확인</b></p>
+      <ol class="steps">
+        <li><b>AI가 찾은 문제 중 실제로 있는 것은?</b></li>
+        <li><b>AI가 놓친 문제는?</b></li>
+        <li><b>행 번호가 맞았나요?</b></li>
+      </ol>
+      <div class="box tip">
+        <span class="box-title">💡 이 표는 메모장이나 ChatGPT 창에 남겨 두세요</span>
+        → PART 03(정제)에서 그대로 붙여 넣습니다
+      </div>
+
+      <h3>1-7. 미션 1 완료: AI 발견 vs 내 확인 <span class="slide-no">정답</span></h3>
+      <table class="table">
+        <thead><tr><th>문제 유형</th><th>건수</th><th>원본 행 번호 [실습파일 확인]</th></tr></thead>
+        <tbody>
+          <tr><td>소계/메모 행</td><td>3</td><td>74, 165, 241</td></tr>
+          <tr><td>중복 행</td><td>5쌍(10행)</td><td>44·45, 109·110, 177·178, 242·243, 286·287</td></tr>
+          <tr><td>지점명 표기</td><td>12 + 빈칸 1</td><td>빈칸 71</td></tr>
+          <tr><td>상품명 표기</td><td>공백 8 + 빈칸 1</td><td>16, 35, 63, 84, 107, 151, 207, 289 / 빈칸 54</td></tr>
+          <tr><td>상품코드 오류</td><td>P013 5 + 빈칸 1</td><td>89, 126, 202, 256, 278 / 빈칸 181</td></tr>
+          <tr><td>날짜 형식</td><td>텍스트 10 + 빈칸 1</td><td>24, 48, 69, 87, 122, 159, 183, 211, 252, 296 / 빈칸 118</td></tr>
+          <tr><td>텍스트 숫자</td><td>8</td><td>수량 31·57·132·263, 단가 82·170, 매출액 103·219</td></tr>
+          <tr><td>매출액 불일치</td><td>5</td><td>52, 141, 188, 229, 271</td></tr>
+          <tr><td>기타 빈 셀</td><td>6</td><td>수량 8, 단가 96, 매출액 145, 결제수단 37, 담당자 21, 주문상태 224</td></tr>
+        </tbody>
+      </table>
+      <div class="box note">
+        <span class="box-title">📌 정답</span>
+        "취소 20건은 오류가 아닙니다. 지우지 않고, 분석할 때 빼기만 합니다."
+      </div>
+    </section>
+
+    <!-- ===================== PART 02 (슬라이드 16~33) ===================== -->
+    <section class="card" id="part2">
+      <h2><span class="num">02</span>AI 수식 생성·검증</h2>
+      <p class="lead">미션 2 │ 수식으로 문제를 찾아내자</p>
+
+      <table class="table">
+        <tbody>
+          <tr><td><strong>핵심</strong></td><td>수식 복사가 아니라 문제 찾기</td></tr>
+          <tr><td><strong>방식</strong></td><td>09 테스트 → 05 실전 적용</td></tr>
+          <tr><td><strong>시간</strong></td><td>40분</td></tr>
+        </tbody>
+      </table>
+
+      <h3>2-1. 작업 준비: 원본은 그대로, 복사본에서 작업 <span class="slide-no">실습 3분 · 05 시트 · A1 붙여넣기 + M1~Q1 제목</span></h3>
+      <ol class="steps">
+        <li><b>02_매출원본 전체 선택</b><span>Ctrl+A → Ctrl+C</span></li>
+        <li><b>05_정제데이터 A1 클릭</b><span>Ctrl+V</span></li>
+        <li><b>M1~Q1에 도우미 열 제목 입력</b></li>
+      </ol>
+      <table class="table">
+        <thead><tr><th>05 시트 도우미 열</th><th>M</th><th>N</th><th>O</th><th>P</th><th>Q</th></tr></thead>
+        <tbody>
+          <tr><td><strong>제목</strong></td><td>상품분류</td><td>매출검증</td><td>중복키</td><td>중복여부</td><td>날짜변환</td></tr>
+        </tbody>
+      </table>
+      <div class="box tip">
+        <span class="box-title">💡 완료했으면 손을 들어주세요</span>
+        전원 완료 후 다음으로 넘어갑니다
+      </div>
+
+      <h3>2-2. 테스트 먼저, 실전은 나중에</h3>
+      <p><b>AI에게 수식 요청 → 09 테스트 데이터(10행) → 예상 결과와 비교 → 통과하면 05(300행)에 적용</b></p>
+      <p>틀리면? → AI에게 다시 질문</p>
+      <table class="table">
+        <thead><tr><th colspan="2">왜 테스트부터 할까요?</th></tr></thead>
+        <tbody>
+          <tr><td><strong>10행은 눈으로 검산 가능</strong></td><td>예상 결과가 미리 적혀 있어 바로 비교할 수 있다</td></tr>
+          <tr><td><strong>300행은 눈으로 확인 불가</strong></td><td>틀린 수식을 그대로 쓰면 틀린 숫자가 보고서까지 간다</td></tr>
+        </tbody>
+      </table>
+
+      <h3>2-3. 함수 지도: 어디에서 무엇을 쓰나 <span class="slide-no">다시 보기</span></h3>
+      <p class="muted">오프닝에서 본 지도의 상세판 — 09에서 먼저 테스트하고, 05의 각 열을 채웁니다</p>
+      <p><b>05_정제데이터 — 채우는 열</b></p>
+      <table class="table">
+        <thead><tr><th>열</th><th>내용</th><th>함수</th><th>참고</th></tr></thead>
+        <tbody>
+          <tr><td><strong>M</strong></td><td>상품분류</td><td>XLOOKUP</td><td>슬라이드 26</td></tr>
+          <tr><td><strong>N</strong></td><td>매출검증</td><td>IF + COUNT</td><td>슬라이드 22~23</td></tr>
+          <tr><td><strong>O</strong></td><td>중복키</td><td>TEXTJOIN</td><td>슬라이드 28</td></tr>
+          <tr><td><strong>P</strong></td><td>중복여부</td><td>IF + COUNTIF</td><td>슬라이드 28</td></tr>
+          <tr><td><strong>Q</strong></td><td>날짜변환</td><td>IFERROR · DATEVALUE · SUBSTITUTE</td><td>슬라이드 39</td></tr>
+          <tr><td><strong>R~U</strong></td><td>표준화(임시)</td><td>XLOOKUP · COUNTIF · SUBSTITUTE</td><td>슬라이드 40~41</td></tr>
+          <tr><td><strong>W2</strong></td><td>참고 합계</td><td>SUMIFS + DATE</td><td>슬라이드 30</td></tr>
+        </tbody>
+      </table>
+      <p><b>09 테스트 먼저</b> — IF → D6 (21) · XLOOKUP → B20 (24) · SUMIFS → M33 (29)</p>
+      <div class="box note">
+        <span class="box-title">📌 같은 4개 그룹 — 판정 · 찾기 · 정리 · 합계</span>
+        주인공 IF · XLOOKUP · COUNTIF · SUMIFS
+      </div>
+
+      <h3>2-4. 수식 요청 프롬프트 공식 <span class="slide-no">Level 2 · 빈칸 채우기</span></h3>
+      <p><b>Excel 버전 + 시트·열 위치 + 원하는 결과 + 예외 처리 + 설명 요청</b></p>
+      <div class="prompt">
+        <div class="prompt-head">
+          <span class="label">예시 · 수식 요청 프롬프트 공식 (Level 2)</span>
+          <button class="copy-btn" onclick="copyPrompt(this)">복사</button>
+        </div>
+        <pre>나는 [Excel 2021]을 사용해.
+[「05_정제데이터」의 상품코드는 D열]이고 …
+[상품분류를 가져오는] 수식을 만들어줘.
+[못 찾으면 "확인필요"]라고 표시해줘.
+[수식 각 부분의 역할]도 설명해줘.</pre>
+      </div>
+      <div class="box warn">
+        <span class="box-title">⚠ 주의</span>
+        Excel 2021에는 TEXTSPLIT · TEXTBEFORE · TEXTAFTER가 없습니다 → 버전을 꼭 쓰세요<br>
+        이 5개가 빠지면 AI가 없는 함수를 주거나, 열을 틀리게 씁니다
+      </div>
+
+      <h3>2-5. [09-①] IF 테스트: 매출액이 맞을까? <span class="slide-no">실습 3분 · 09 시트 · D6:D15 채우기</span></h3>
+      <p><b>학생</b> 빈칸을 채워 AI에게 요청 → <b>AI</b> 수식 작성·설명 → <b>Excel</b> D6~D15 계산</p>
+      <div class="prompt">
+        <div class="prompt-head">
+          <span class="label">PROMPT · [09-①] IF 테스트 (빈칸 채우기)</span>
+          <button class="copy-btn" onclick="copyPrompt(this)">복사</button>
+        </div>
+        <pre>나는 Excel [      ] 버전을 사용해.
+「09_함수테스트」에서 수량은 A열, 판매단가는 [   ]열,
+매출액은 [   ]열이야.
+수량×판매단가가 매출액과 같으면 "[      ]",
+다르면 "[        ]"라고 D열에 표시하는
+수식을 만들어줘. 수식 설명도 해줘.</pre>
+      </div>
+      <ol class="steps">
+        <li><b>D6에 수식 입력</b></li>
+        <li><b>채우기 핸들 더블클릭</b></li>
+        <li><b>E열 예상 결과와 비교</b></li>
+        <li><b>검토필요가 3건이면 통과</b></li>
+      </ol>
+      <p><b>수식 예시</b></p>
+      <pre class="formula">=IF(A6*B6=C6,"정상","검토필요")</pre>
+
+      <h3>2-6. 05에 적용했더니… 함정 발견! <span class="slide-no">실습 · 05 시트 · N열 매출검증 채우기</span></h3>
+      <pre class="formula">=IF(F2*G2=H2,"정상","검토필요")      ← 05 시트 N2에 입력 후 아래로 채우기</pre>
+      <table class="table">
+        <thead><tr><th>행</th><th>상황</th><th>결과</th></tr></thead>
+        <tbody>
+          <tr><td><strong>74행 "3월 소계"</strong></td><td>빈칸 × 빈칸 = 빈칸</td><td>→ "정상"</td></tr>
+          <tr><td><strong>103행 매출액 '13500' (텍스트)</strong></td><td>계산은 맞는데</td><td>→ "검토필요"</td></tr>
+        </tbody>
+      </table>
+      <div class="box warn">
+        <span class="box-title">⚠ 테스트는 통과했는데 실전에서 틀렸습니다</span>
+        테스트 데이터에 없던 상황(빈칸 · 텍스트 숫자)이 실전에는 있기 때문입니다
+      </div>
+
+      <h3>2-7. AI에게 조건을 추가해 다시 요청 <span class="slide-no">Level 3 · 직접 작성 · 05 시트 · N열 개선 수식으로 교체</span></h3>
+      <div class="prompt">
+        <div class="prompt-head">
+          <span class="label">추가 요청 · 앞의 요청에 이어서</span>
+          <button class="copy-btn" onclick="copyPrompt(this)">복사</button>
+        </div>
+        <pre>(앞의 요청에 이어서) 빈칸이나 텍스트로 된 숫자가 있으면 "값확인"으로 표시해줘.</pre>
+      </div>
+      <p><b>개선 수식</b></p>
+      <pre class="formula">=IF(COUNT(F2:H2)&lt;3,"값확인",IF(F2*G2=H2,"정상","검토필요"))</pre>
+      <div class="box note">
+        <span class="box-title">📌 COUNT는 숫자만 셉니다</span>
+        F·G·H 중 하나라도 빈칸이거나 텍스트면 → 개수가 3보다 작음 → "값확인"
+      </div>
+      <div class="prompt">
+        <div class="prompt-head">
+          <span class="label">PROMPT · N열 매출검증 개선 수식 (Level 3)</span>
+          <button class="copy-btn" onclick="copyPrompt(this)">복사</button>
+        </div>
+        <pre>나는 Excel 2021을 사용해. 「05_정제데이터」 시트에서 수량은 F열, 판매단가는 G열, 매출액은 H열이고,
+데이터는 2행부터 있어. N2에 넣고 아래로 채울 수식 1개를 만들어줘.
+판정 조건:
+1. F2:H2 세 칸 중 숫자로 된 칸이 3개가 아니면 "값확인"    (빈칸이나 텍스트로 입력된 숫자는 숫자로 세지 않음)
+2. 세 칸이 모두 숫자이고 F×G가 H와 같으면 "정상"
+3. 세 칸이 모두 숫자이고 F×G가 H와 다르면 "검토필요"
+제약:  - COUNT 함수로 숫자 칸의 개수를 세는 방식으로 만들어줘.   - 텍스트 숫자를 숫자로 변환하지 마., - IF는 2개, 수식은 한 줄로 최대한 짧게.
+            - 수식 1개와 각 부분의 역할만 설명해줘.</pre>
+      </div>
+      <table class="table">
+        <thead><tr><th>결과</th><th>건수</th><th>행</th></tr></thead>
+        <tbody>
+          <tr><td><strong>검토필요</strong></td><td>5건</td><td>52 · 141 · 188 · 229 · 271행</td></tr>
+          <tr><td><strong>값확인</strong></td><td>14건</td><td>소계·메모 3(74·165·241) + 빈칸 3(8·96·145) + 텍스트 숫자 8(31·57·82·103·132·170·219·263)</td></tr>
+        </tbody>
+      </table>
+
+      <h3>2-8. [09-②] XLOOKUP 테스트: 상품분류 가져오기 <span class="slide-no">실습 3분 · 09 시트 · B20:B29 채우기</span></h3>
+      <p><b>학생</b> 빈칸을 채워 AI에게 요청 → <b>AI</b> 수식 작성·설명 → <b>Excel</b> B20~B29 계산</p>
+      <div class="prompt">
+        <div class="prompt-head">
+          <span class="label">PROMPT 1 · [09-②] XLOOKUP 테스트 (빈칸 채우기)</span>
+          <button class="copy-btn" onclick="copyPrompt(this)">복사</button>
+        </div>
+        <pre>나는 Excel [        ]을 사용해.
+「09_함수테스트」의 상품코드는 A열,
+「03_상품Master」의 상품코드는 A열,
+상품분류는 [    ]열이야.  XLOOKUP으로 B20에 상품분류를 가져와줘.
+코드를 못 찾으면 "확인필요"라고 표시해줘.
+수식 각 부분의 역할도 설명해줘.</pre>
+      </div>
+      <div class="prompt">
+        <div class="prompt-head">
+          <span class="label">PROMPT 2 · 어떤 함수를 써야 할지 묻기</span>
+          <button class="copy-btn" onclick="copyPrompt(this)">복사</button>
+        </div>
+        <pre>나는 Excel 2021을 사용해.
+「09_함수테스트」의 상품코드는 A열이고,
+「03_상품Master」의 상품코드는 A열,
+ 상품분류는 C열이야. B20에 상품분류를 가져오려면 어떤 함수를 써야하니?</pre>
+      </div>
+      <p><b>확인 포인트</b></p>
+      <table class="table">
+        <thead><tr><th>상품코드</th><th>예상 결과</th></tr></thead>
+        <tbody>
+          <tr><td>P001</td><td>커피</td></tr>
+          <tr><td>P005</td><td>논커피</td></tr>
+          <tr><td>P013</td><td>확인필요</td></tr>
+          <tr><td>P011</td><td>확인필요</td></tr>
+        </tbody>
+      </table>
+      <p class="muted">Master에 없는 코드(P013·P011)가 "확인필요"로 나오면 통과</p>
+      <p><b>수식 예시</b></p>
+      <pre class="formula">=XLOOKUP(A20,'03_상품Master'!$A$2:$A$11,'03_상품Master'!$C$2:$C$11,"확인필요")</pre>
+
+      <h3>2-9. XLOOKUP 수식 해부</h3>
+      <pre class="formula">=XLOOKUP(  ①  ,  ②  ,  ③  ,  ④  )</pre>
+      <table class="table">
+        <thead><tr><th>위치</th><th>의미</th><th>예</th></tr></thead>
+        <tbody>
+          <tr><td><strong>①</strong></td><td>찾을 값</td><td><span class="f">A20</span></td></tr>
+          <tr><td><strong>②</strong></td><td>찾을 범위</td><td><span class="f">'03_상품Master'!$A$2:$A$11</span></td></tr>
+          <tr><td><strong>③</strong></td><td>가져올 범위</td><td><span class="f">'03_상품Master'!$C$2:$C$11</span></td></tr>
+          <tr><td><strong>④</strong></td><td>못 찾을 때</td><td><span class="f">"확인필요"</span></td></tr>
+        </tbody>
+      </table>
+      <ol class="steps">
+        <li><b>$ 절대참조</b><span>아래로 채울 때 Master 범위가 밀리지 않게 고정</span></li>
+        <li><b>작은따옴표 ' '</b><span>시트 이름이 숫자로 시작하면 필요 → 빠지면 오류</span></li>
+        <li><b>VLOOKUP과 비교</b><span>열 번호를 셀 필요 없음, 왼쪽 방향 조회 가능</span></li>
+      </ol>
+
+      <h3>2-10. 05에 적용: 수식이 오류 데이터를 찾아준다 <span class="slide-no">실습 2분 · 05 시트 · M열 상품분류 채우기</span></h3>
+      <p><b>M2</b></p>
+      <pre class="formula">=XLOOKUP(D2,'03_상품Master'!$A$2:$A$11,'03_상품Master'!$C$2:$C$11,"확인필요")</pre>
+      <p>M열 필터에서 <b>확인필요</b>만 골라 보면</p>
+      <table class="table">
+        <thead><tr><th>건수</th><th>내용</th></tr></thead>
+        <tbody>
+          <tr><td><strong>5건</strong></td><td>상품코드 P013 (Master에 없는 코드)</td></tr>
+          <tr><td><strong>1건</strong></td><td>상품코드 빈칸 (181행)</td></tr>
+          <tr><td><strong>3건</strong></td><td>소계 · 메모 행 (분석 대상 아님)</td></tr>
+        </tbody>
+      </table>
+      <div class="box note">
+        <span class="box-title">📌 핵심</span>
+        테스트에서 확인한 수식이 300행에서 오류 데이터를 찾아냈습니다
+      </div>
+
+      <h3>2-11. 오류 코드가 나오면? AI에게 교정 요청 <span class="slide-no">강사 시연 · 09 시트 · G26 (시연 후 삭제)</span></h3>
+      <table class="table">
+        <thead><tr><th>오류 코드</th><th>흔한 원인</th></tr></thead>
+        <tbody>
+          <tr><td><strong>#N/A</strong></td><td>찾는 값이 없음</td></tr>
+          <tr><td><strong>#VALUE!</strong></td><td>텍스트를 숫자로 계산</td></tr>
+          <tr><td><strong>#NAME?</strong></td><td>오타 / 버전에 없는 함수</td></tr>
+          <tr><td><strong>#REF!</strong></td><td>참조 범위가 사라짐</td></tr>
+        </tbody>
+      </table>
+      <div class="prompt">
+        <div class="prompt-head">
+          <span class="label">교정 프롬프트 · 오류 코드 해결</span>
+          <button class="copy-btn" onclick="copyPrompt(this)">복사</button>
+        </div>
+        <pre>Excel 2021에서 이 수식을 입력했더니
+[오류 코드]가 나왔어.
+수식: [붙여넣기]
+해당 셀 값: [값]
+원인과 수정한 수식을 알려줘.</pre>
+      </div>
+      <p class="muted">[나중에 넣을 것] 오류 화면 캡처 2장 — ① G26에서 나온 #N/A 화면 ② 연습 중 겪은 #REF! 화면 (Ctrl+V로 수식째 붙여넣은 경우)</p>
+      <p><b>시연 순서</b> — 「확인필요」를 뺀 수식을 G26에 입력 → #N/A 확인 → 교정 프롬프트로 AI에게 질문</p>
+      <pre class="formula">=XLOOKUP(A26,'03_상품Master'!$A$2:$A$11,'03_상품Master'!$C$2:$C$11)</pre>
+      <div class="box tip">
+        <span class="box-title">💡 오류 코드 + 수식 + 셀 값을 함께 주면</span>
+        AI가 원인을 정확히 짚습니다
+      </div>
+
+      <h3>2-12. 텍스트 정리 · 중복 찾기 <span class="slide-no">시연 + 실습 · 05 시트 · O열(중복키) · P열(중복여부)</span></h3>
+      <p><b>텍스트 정리: TRIM의 한계 (강사 시연)</b></p>
+      <table class="table">
+        <thead><tr><th>수식</th><th>"카페 라떼" 결과</th></tr></thead>
+        <tbody>
+          <tr><td><span class="f">=TRIM(E2)</span></td><td>카페 라떼 (실패)</td></tr>
+          <tr><td><span class="f">=SUBSTITUTE(E2," ","")</span></td><td>카페라떼 (성공)</td></tr>
+        </tbody>
+      </table>
+      <div class="box note">
+        <span class="box-title">📌 TRIM은 앞뒤 공백과 겹친 공백만 지웁니다</span>
+        더 좋은 방법: 명칭은 코드로 Master에서 가져오기 (PART 03)
+      </div>
+      <p><b>중복 찾기: 한 행을 문자열 하나로 (학생 실습)</b></p>
+      <p><b>O2</b></p>
+      <pre class="formula">=TEXTJOIN("|",FALSE,A2:L2)</pre>
+      <p><b>P2</b></p>
+      <pre class="formula">=IF(COUNTIF($O$2:$O$301,O2)&gt;1,"중복","")</pre>
+      <ul>
+        <li>O2:P2 함께 선택 → 301행까지 채우기</li>
+        <li>결과: 중복 5쌍 (10행)</li>
+        <li>두 행 모두 "중복" 표시 → 지울 것은 한 행뿐</li>
+      </ul>
+      <div class="box tip">
+        <span class="box-title">💡 COUNTIF = "나랑 똑같은 행이 몇 개?"</span>
+        P열은 찾기만 합니다 — 실제 삭제는 PART 03 「중복된 항목 제거」, 날짜 변환도 PART 03
+      </div>
+
+      <h3>2-13. [09-③] SUMIFS 테스트: 오류 없이 틀린 값 <span class="slide-no">실습 4분 · 09 시트 · M33:M36 / O33:O36</span></h3>
+      <p>M33~M35에 조건 칸(J~L)을 참조하는 SUMIFS → N열 예상 결과와 비교 → O열에 표를 보고 직접 계산</p>
+      <p><b>M33</b></p>
+      <pre class="formula">=SUMIFS($D$33:$D$42,$A$33:$A$42,J33,$B$33:$B$42,K33,$C$33:$C$42,L33)</pre>
+      <p><b>M36</b> ← 월 조건 빼고 따로 입력</p>
+      <pre class="formula">=SUMIFS($D$33:$D$42,$B$33:$B$42,K36,$C$33:$C$42,L36)</pre>
+      <table class="table">
+        <thead><tr><th>문제</th><th>SUMIFS 결과</th><th>직접 계산</th><th>차이 원인</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Q1</strong> 3월 신구점 판매</td><td>14,000</td><td>21,000</td><td>"신구 점" 7,000 누락</td></tr>
+          <tr><td><strong>Q2</strong> 4월 성남점 판매</td><td>9,000</td><td>9,000</td><td>일치 (취소 3,000은 정상 제외)</td></tr>
+          <tr><td><strong>Q3</strong> 5월 용인점 판매</td><td>12,000</td><td>17,000</td><td>"용인 점" 5,000 누락</td></tr>
+          <tr><td><strong>Q4</strong> 신구점 판매 전체</td><td>14,000</td><td>29,000</td><td>"신구 점" + 텍스트 "8,000" 누락</td></tr>
+        </tbody>
+      </table>
+      <div class="box warn">
+        <span class="box-title">⚠ Q2만 맞습니다 — 수식이 아니라 데이터가 틀린 것</span>
+        SUMIFS는 오류 없이 조용히 틀립니다
+      </div>
+
+      <h3>2-14. 05에 적용: 3월 신구점 판매 매출 <span class="slide-no">실습 2분 · 05 시트 · W2 (참고 합계)</span></h3>
+      <pre class="formula">=SUMIFS(H:H,C:C,"신구점",K:K,"판매",A:A,"&gt;="&amp;DATE(2026,3,1),A:A,"&lt;"&amp;DATE(2026,4,1))</pre>
+      <p><b>285,300원</b> — 정제 전 결과 (참고값)</p>
+      <p><b>이 숫자, 보고서에 써도 될까요?</b></p>
+      <ul>
+        <li>텍스트 날짜 행 → 빠짐</li>
+        <li>"신구 점" 표기 행 → 빠짐</li>
+        <li>텍스트 매출액 행 → 빠짐</li>
+        <li>잘못 입력된 매출액 → 그대로 포함</li>
+      </ul>
+      <div class="box note">
+        <span class="box-title">📌 정제 후에 다시 계산해서 비교해 봅시다 (PART 03)</span>
+        정제 후 : 298,300원
+      </div>
+
+      <h3>2-15. AI 수식 검증 3단계</h3>
+      <ol class="steps">
+        <li><b>실행되는가?</b><span>오류 코드가 나오지 않는다</span></li>
+        <li><b>논리가 맞는가?</b><span>소계 행이 "정상"으로 나온 사례를 기억하세요</span></li>
+        <li><b>교차검증했는가?</b><span>필터 + 상태 표시줄 합계로 다른 방법과 비교</span></li>
+      </ol>
+      <div class="box note">
+        <span class="box-title">📌 흐름</span>
+        AI가 만든 수식 → Excel 결과 → 다른 방법으로 확인
+      </div>
+
+      <h3>2-16. 미션 2 완료 체크</h3>
+      <ul>
+        <li>☐ IF 매출 검증 (개선판)</li>
+        <li>☐ XLOOKUP 상품분류</li>
+        <li>☐ SUMIFS 조건 합계</li>
+        <li>☐ 09 테스트 → 05 실전 적용</li>
+        <li>☐ 교차검증</li>
+      </ul>
+      <div class="box note">
+        <span class="box-title">📌 핵심</span>
+        함수를 외우는 것보다 문제를 정확히 설명하는 능력이 더 중요합니다
+      </div>
+
+      <div class="box tip">
+        <span class="box-title">☕ BREAK · 휴식 10분</span>
+        다음 시간: 찾은 문제를 실제로 고칩니다
+      </div>
+    </section>
+
+    <!-- ===================== PART 03 (슬라이드 34~45) ===================== -->
+    <section class="card" id="part3">
+      <h2><span class="num">03</span>데이터 정제 및 구조 표준화</h2>
+      <p class="lead">미션 3 │ 분석하기 전에 데이터를 정리하자</p>
+
+      <table class="table">
+        <tbody>
+          <tr><td><strong>원칙</strong></td><td>원본 보존 · 기준 기록</td></tr>
+          <tr><td><strong>결과</strong></td><td>05_정제데이터 완성</td></tr>
+          <tr><td><strong>시간</strong></td><td>30분</td></tr>
+        </tbody>
+      </table>
+
+      <h3>3-1. 왜 정제가 먼저일까? <span class="slide-no">[09-③] 테스트 결과 다시 보기</span></h3>
+      <table class="table">
+        <thead><tr><th>문제</th><th>SUMIFS</th><th>실제</th></tr></thead>
+        <tbody>
+          <tr><td>3월 신구점</td><td>14,000</td><td>21,000</td></tr>
+          <tr><td>4월 성남점</td><td>9,000</td><td>9,000</td></tr>
+          <tr><td>5월 용인점</td><td>12,000</td><td>17,000</td></tr>
+          <tr><td>신구점 전체</td><td>14,000</td><td>29,000</td></tr>
+        </tbody>
+      </table>
+      <div class="box note">
+        <span class="box-title">📌 정제가 끝나면 숫자가 바뀝니다</span>
+        05 시트 W2 (3월 신구점 판매) <b>285,300 → 298,300</b><br>
+        PART 03이 끝나면 W2가 저절로 바뀌는 것을 확인합니다
+      </div>
+      <p>표기 통일 · 숫자 변환 · 불필요한 행 제거가 끝나야 분석 결과를 믿을 수 있습니다</p>
+
+      <h3>3-2. AI에게 정제 순서와 기준 묻기 <span class="slide-no">실습</span></h3>
+      <div class="prompt">
+        <div class="prompt-head">
+          <span class="label">PROMPT · 정제 순서와 기준 묻기</span>
+          <button class="copy-btn" onclick="copyPrompt(this)">복사</button>
+        </div>
+        <pre>미션1에서 확인한 문제 목록은 다음과 같아:
+[미션 1 완료 표 붙여넣기]
+Excel 2021에서 정제하려고 해.
+① 처리 순서  ② 문제별 처리 기준  ③ Excel에서 하는 방법
+을 표로 알려줘. 원본은 수정하지 않는다는 전제야.
+목록에 없는 문제는 추측하지 마.</pre>
+      </div>
+      <table class="table">
+        <thead><tr><th>AI</th><th>학생</th></tr></thead>
+        <tbody>
+          <tr><td>순서와 기준을 제안한다</td><td>무엇을 채택할지 결정한다</td></tr>
+        </tbody>
+      </table>
+      <div class="box note">
+        <span class="box-title">📌 AI의 제안 = 선택지</span>
+        최종 기준은 내가 정합니다
+      </div>
+
+      <h3>3-3. 정제 기준 결정표 <span class="slide-no">핵심</span></h3>
+      <table class="table">
+        <thead><tr><th>문제</th><th>권장 기준</th><th>채택</th></tr></thead>
+        <tbody>
+          <tr><td>소계/메모 행</td><td>삭제</td><td></td></tr>
+          <tr><td>완전 중복</td><td>1행만 남김</td><td></td></tr>
+          <tr><td>지점명 표기</td><td>지점코드 → 04_지점Master</td><td></td></tr>
+          <tr><td>상품코드 P013·빈칸</td><td>상품명으로 역조회해 복구</td><td></td></tr>
+          <tr><td>상품명 표기·빈칸</td><td>상품코드 → 03_상품Master</td><td></td></tr>
+          <tr><td>텍스트 숫자·날짜</td><td>숫자·날짜로 변환</td><td></td></tr>
+          <tr><td>판매단가 빈칸</td><td>Master 정상판매가</td><td></td></tr>
+          <tr><td>매출액</td><td>수량 × 판매단가로 재계산</td><td></td></tr>
+          <tr><td>수량·날짜·상태 빈칸</td><td>"확인필요" 표시 후 분석 제외</td><td></td></tr>
+          <tr><td>취소 건</td><td>삭제하지 않고 피벗에서 제외</td><td></td></tr>
+        </tbody>
+      </table>
+      <p><b>토론해 봅시다</b></p>
+      <ul>
+        <li>① P013 행은 코드와 상품명 중 무엇을 믿을까?</li>
+        <li>② 매출액 불일치는 수량이 틀린 걸까, 매출액이 틀린 걸까?</li>
+      </ul>
+      <div class="box tip">
+        <span class="box-title">💡 AI마다 순서 제안이 다릅니다</span>
+        ChatGPT는 7단계, 다른 AI는 6단계로 제안 → 그래서 기준은 내가 정하고 기록합니다
+      </div>
+      <div class="box note">
+        <span class="box-title">📌 정답은 하나가 아닙니다</span>
+        기준을 정하고 기록하는 것이 핵심
+      </div>
+
+      <h3>3-4. 정제 ①: 불필요한 행 → 중복 제거 <span class="slide-no">실습 · 05 시트 · 행 삭제 → 중복 제거</span></h3>
+      <p>순서가 중요합니다 — 소계·메모 행을 먼저 지우고 중복을 제거합니다</p>
+      <ol class="steps">
+        <li><b>불필요한 행 삭제</b><span>L열 비고 열 필터 → "분석 제외" → 보이는 3행 (74·165·241) 선택 → 행 삭제 → 필터 해제 · <b>결과: 3행 삭제</b></span></li>
+        <li><b>중복 제거</b><span>데이터 탭 → 중복된 항목 제거 → A~L열만 체크 (도우미 열 제외) → 확인 메시지 확인 · <b>결과: 5개 제거</b></span></li>
+      </ol>
+      <div class="box warn">
+        <span class="box-title">⚠ 주의</span>
+        도우미 열(M~Q)까지 체크하면 중복 판정이 달라질 수 있습니다
+      </div>
+
+      <h3>3-5. 정제 ②: 숫자 · 날짜 형식 통일 <span class="slide-no">실습 · 05 시트 · Q열 → A열에 값 붙여넣기</span></h3>
+      <p><b>텍스트 숫자</b></p>
+      <ol class="steps">
+        <li><b>셀 왼쪽 위 초록 삼각형 확인</b></li>
+        <li><b>경고 아이콘 클릭</b></li>
+        <li><b>숫자로 변환</b></li>
+      </ol>
+      <p><b>텍스트 날짜 — Q2</b></p>
+      <pre class="formula">=IFERROR(IF(ISNUMBER(A2),A2,DATEVALUE(SUBSTITUTE(A2,".","-"))),"확인필요")</pre>
+      <p class="muted">"2026.05.08"의 점(.)을 하이픈(-)으로 바꾼 뒤 날짜로 변환</p>
+      <div class="box note">
+        <span class="box-title">📌 마무리</span>
+        결과를 값으로 붙여넣기 (Ctrl+Alt+V → 값) → A열 덮어쓰기 → 표시 형식 "날짜"
+      </div>
+
+      <h3>3-6. 정제 ③: 명칭 · 코드 표준화 + 매출액 재계산 <span class="slide-no">실습 · 05 시트 · R~U → C·D·E·H열 교체</span></h3>
+      <p><b>1. 지점명 (R열 → C열)</b></p>
+      <pre class="formula">=XLOOKUP(B2,'04_지점Master'!$A$2:$A$4,'04_지점Master'!$B$2:$B$4,"확인필요")</pre>
+      <p class="muted">"이 행의 지점코드 (B2)를 Master코드 목록에서 찾아, 같은 줄의 표준 지점명을 가져와라"</p>
+      <p><b>2. 상품코드 (S열 → D열)</b></p>
+      <pre class="formula">=IF(COUNTIF('03_상품Master'!$A$2:$A$11,D2)&gt;0,D2,
+XLOOKUP(SUBSTITUTE(E2," ",""),'03_상품Master'!$B$2:$B$11,'03_상품Master'!$A$2:$A$11,"확인필요"))</pre>
+      <p class="muted">"이 코드가 Master에 있나?(COUNTIF&gt;0) 있으면 그대로, 없으면(P013/빈칸) 상품명에서 공백을 빼고, 그 이름으로 코드를 거꾸로 찾아라"</p>
+      <p><b>3. 상품명 (T열 → E열) — 반드시 ② 다음에</b></p>
+      <pre class="formula">=XLOOKUP(D2,'03_상품Master'!$A$2:$A$11,'03_상품Master'!$B$2:$B$11,"확인필요")</pre>
+
+      <p><b>작업 방식: 빈 열에서 수식으로 만들기 → 값으로 붙여넣기 → 원래 열 교체</b></p>
+      <p><b>4. 판매단가 빈칸 채우기</b></p>
+      <p>G열 필터 → "(필드 값 없음)" → 1행(05 94행, 바닐라라떼 P003) → 4500 직접 입력 (Master 정상판매가) → 필터 해제</p>
+      <p><b>5. 매출액 재계산 (U열 → H열)</b> (=F2*G2) : 수량이나 단가가 빈칸인 행은 원래 매출액을 그대로 두고, 나머지만 재계산</p>
+      <pre class="formula">=IF(COUNT(F2:G2)&lt;2,H2,F2*G2)</pre>
+      <p><b>6. 정리</b>: R~U열 선택 → Delete 키(내용만 지우기). 열 삭제는 하지 않음 (W2 위치 유지)</p>
+      <div class="box note">
+        <span class="box-title">📌 [검증] W2가 298,300원으로 바뀌었는지</span>
+        "정제 전 285,300원, 정제 후 298,300원."
+      </div>
+      <div class="box note">
+        <span class="box-title">📌 원칙</span>
+        사람이 입력한 이름보다 코드를 믿는다 → 명칭은 코드로 Master에서 가져옵니다
+      </div>
+      <div class="box warn">
+        <span class="box-title">⚠ 기억하세요</span>
+        "모르는 값은 0으로 만들지 말고, 원래 값을 두고 표시만 한다"
+      </div>
+
+      <h3>3-7. 조건부 서식으로 남은 문제 강조 <span class="slide-no">실습 · 05 시트 · A2:L293 조건부 서식</span></h3>
+      <ol class="steps">
+        <li><b>A2:L293 범위 선택</b></li>
+        <li><b>홈 → 조건부 서식 → 새 규칙</b></li>
+        <li><b>"수식을 사용하여 서식을 지정할 셀 결정"</b></li>
+        <li><b>수식 입력 → 서식 → 연한 빨강 채우기</b></li>
+      </ol>
+      <pre class="formula">=OR($N2&lt;&gt;"정상",NOT(ISNUMBER($A2)),$K2="")</pre>
+      <p class="muted">N열이 정상이 아니거나, 또는 날짜가 숫자가 아니거나, 또는 주문상태가 빈칸이면 칠합니다 · 열 문자 앞에만 $ → 행 전체가 칠해짐</p>
+      <p><b>결과 예시 — 빨간 행 3개</b></p>
+      <table class="table">
+        <thead><tr><th>원본 행</th><th>05 행</th><th>남은 문제</th></tr></thead>
+        <tbody>
+          <tr><td>8행</td><td>8행</td><td>수량 빈칸</td></tr>
+          <tr><td>118행</td><td>115행</td><td>주문일자 빈칸</td></tr>
+          <tr><td>224행</td><td>219행</td><td>주문상태 빈칸</td></tr>
+        </tbody>
+      </table>
+      <div class="box tip">
+        <span class="box-title">💡 핵심</span>
+        300행을 눈으로 보지 않고 Excel이 문제 행을 칠하게 합니다
+      </div>
+
+      <h3>3-8. 반복 작업이라면? Power Query <span class="slide-no">강사 시연 2분</span></h3>
+      <table class="table">
+        <thead><tr><th>구분</th><th>작업</th><th>처리</th></tr></thead>
+        <tbody>
+          <tr><td><strong>지금</strong> (오늘 실습 방식)</td><td>한 번 하는 작업</td><td>수식 · 기능으로 처리</td></tr>
+          <tr><td><strong>다음 단계</strong></td><td>매달 반복되는 작업</td><td>Power Query로 자동화 — "적용된 단계"가 기록되어 새로 고침만 하면 끝</td></tr>
+        </tbody>
+      </table>
+      <p><b>시연 순서</b></p>
+      <ol class="steps">
+        <li><b>데이터 → 테이블/범위에서</b></li>
+        <li><b>공백 제거 · 형식 변경</b></li>
+        <li><b>"적용된 단계" 확인</b></li>
+      </ol>
+
+      <h3>3-9. 빼기 전에 기록하기: 확인필요 목록 <span class="slide-no">강사 시연 1분 · 05 시트 → 10_확인필요 시트</span></h3>
+      <ol class="steps">
+        <li><b>05 시트 → 색 기준 필터 → 연한 빨강</b><span>(3행만 보임)</span></li>
+        <li><b>A~L 범위만 선택 → Ctrl+C</b></li>
+        <li><b>「10_확인필요」 A5 클릭 → Ctrl+V</b></li>
+        <li><b>M열에 제외 사유 적기</b><span>→ 05로 돌아와 PART 04에서 3행 삭제</span></li>
+      </ol>
+      <div class="box warn">
+        <span class="box-title">⚠ 주의</span>
+        M~Q 도우미 열까지 복사하지 않기 — A~L만
+      </div>
+      <p><b>「10_확인필요」 시트 결과</b></p>
+      <table class="table">
+        <thead><tr><th>원본 행</th><th>지점</th><th>상품</th><th>빠진 값</th><th>제외 사유</th></tr></thead>
+        <tbody>
+          <tr><td>8행</td><td>성남점</td><td>아메리카노</td><td>수량</td><td>수량 빈칸</td></tr>
+          <tr><td>118행</td><td>신구점</td><td>아메리카노</td><td>주문일자</td><td>주문일자 빈칸</td></tr>
+          <tr><td>224행</td><td>성남점</td><td>바닐라라떼</td><td>주문상태</td><td>주문상태 빈칸</td></tr>
+        </tbody>
+      </table>
+      <p>원본은 「02_매출원본」에 그대로 있습니다 → 이 목록을 담당자에게 보내 확인받고, 답이 오면 고쳐서 다시 분석에 넣습니다</p>
+      <div class="box note">
+        <span class="box-title">📌 분석에서 뺀다 ≠ 버린다</span>
+        빼는 것보다 기록하는 것이 더 중요합니다
+      </div>
+
+      <h3>3-10. 정제 전 → 정제 후 <span class="slide-no">미션 3 완료</span></h3>
+      <table class="table">
+        <thead><tr><th>지표</th><th>정제 전 → 정제 후</th></tr></thead>
+        <tbody>
+          <tr><td>지점명 고유값 (빈칸 제외)</td><td><strong>11종 → 3종</strong></td></tr>
+          <tr><td>3월 신구점 판매 SUMIFS (원)</td><td><strong>285,300 → 298,300</strong></td></tr>
+          <tr><td>분석 대상 행 (확인필요 3행 제외)</td><td><strong>300 → 289행</strong></td></tr>
+        </tbody>
+      </table>
+      <p><b>미션 3 체크</b></p>
+      <ul>
+        <li>☐ 원본 보존</li>
+        <li>☐ 정제 기준표 작성</li>
+        <li>☐ 형식 통일</li>
+        <li>☐ 명칭·코드 표준화</li>
+        <li>☐ 남은 문제 표시</li>
+      </ul>
+    </section>
+
+    <!-- ===================== PART 04 (슬라이드 46~52) ===================== -->
+    <section class="card" id="part4">
+      <h2><span class="num">04</span>매출 분석 &amp; 피벗테이블</h2>
+      <p class="lead">미션 4 │ 정리된 데이터로 매출을 분석하자</p>
+
+      <table class="table">
+        <tbody>
+          <tr><td><strong>질문</strong></td><td>지점별 · 월별 · 상품분류별 매출은?</td></tr>
+          <tr><td><strong>결과</strong></td><td>06_피벗분석</td></tr>
+          <tr><td><strong>시간</strong></td><td>20분</td></tr>
+        </tbody>
+      </table>
+
+      <h3>4-1. 분석 준비: 표로 변환 <span class="slide-no">실습 · 05 시트 · 3행 삭제 → 표(Ctrl+T)</span></h3>
+      <ol class="steps">
+        <li><b>확인필요 3행 처리</b><span>(삭제 또는 표시) — 마지막 행 290(데이터 289행) 확인</span></li>
+        <li><b>데이터 안 아무 셀 클릭</b></li>
+        <li><b>Ctrl + T</b></li>
+        <li><b>"머리글 포함" 체크 → 확인</b></li>
+      </ol>
+      <table class="table">
+        <thead><tr><th>왜 표로 만들까요?</th><th>확인하기</th></tr></thead>
+        <tbody>
+          <tr><td>데이터가 늘어나도 피벗 범위가 자동으로 확장됩니다</td><td>표 디자인 탭이 나타나면 성공</td></tr>
+          <tr><td>필터·서식이 자동 적용됩니다</td><td>표 이름을 "매출"로 바꿔 두면 편리</td></tr>
+        </tbody>
+      </table>
+      <div class="box note">
+        <span class="box-title">📌 정리된 데이터 + 표 구조 = 분석할 준비 완료</span>
+      </div>
+      <div class="box tip">
+        <span class="box-title">💡 피벗 사용 이유?</span>
+        영수증 289장을 바닥에 펼쳐놓고, 지점별로 줄세우고, 월별로 칸을 나눠서, 금액을 더하는 일은 Excel이 1초만 해준다.<br>
+        <b>행</b> : 줄세울기준, <b>열</b>: 칸 나눌 기준, <b>값</b>: 더할 숫자, <b>필터</b>: 빼고 볼것
+      </div>
+
+      <h3>4-2. AI에게 피벗 구조 묻기 <span class="slide-no">Level 3 · 직접 작성 · 틀만 제공</span></h3>
+      <div class="prompt">
+        <div class="prompt-head">
+          <span class="label">틀 · 피벗 구조 묻기 (Level 3 · 직접 작성)</span>
+          <button class="copy-btn" onclick="copyPrompt(this)">복사</button>
+        </div>
+        <pre>나는 [월별·지점별 판매 매출 비교 ]를 알고 싶어.
+데이터 필드는 [주문일자, 지점명, 상품분류, 주문상태, 매출액 ]이야.
+Excel 2021 피벗테이블의
+① 행  ② 열  ③ 값  ④ 필터
+구성과 그렇게 구성하는 이유를 알려줘.</pre>
+      </div>
+      <table class="table">
+        <thead><tr><th colspan="2">채울 내용 힌트</th></tr></thead>
+        <tbody>
+          <tr><td><strong>목적</strong></td><td>월별·지점별 매출 비교</td></tr>
+          <tr><td><strong>필드</strong></td><td>주문일자, 지점명, 상품분류, 주문상태, 매출액 …</td></tr>
+        </tbody>
+      </table>
+      <p><b>학생</b> 직접 프롬프트 작성·전송</p>
+
+      <h3>4-3. 피벗테이블 만들기 <span class="slide-no">실습 · 06 시트 · A3에 피벗</span></h3>
+      <p><b>피벗 필드 배치</b></p>
+      <table class="table">
+        <thead><tr><th>영역</th><th>필드</th></tr></thead>
+        <tbody>
+          <tr><td><strong>필터</strong></td><td>주문상태 = 판매</td></tr>
+          <tr><td><strong>열</strong></td><td>주문일자 (월)</td></tr>
+          <tr><td><strong>행</strong></td><td>지점명</td></tr>
+          <tr><td><strong>값</strong></td><td>합계 : 매출액</td></tr>
+        </tbody>
+      </table>
+      <p><b>만드는 순서</b></p>
+      <ol class="steps">
+        <li><b>표 안 클릭 → 삽입 → 피벗 테이블</b><span>표/범위: 매출</span></li>
+        <li><b>기존 워크시트 → 06_피벗분석 A3</b></li>
+        <li><b>배치</b><span>필터=주문상태(판매만) / 열=주문일자 / 행=지점명 / 값=합계: 매출액</span></li>
+        <li><b>날짜가 일 단위로 펼쳐지면</b><span>날짜 셀 우클릭 → 그룹 → "월"만 선택 (일 해제) → 확인</span></li>
+        <li><b>값 우클릭 → 값 필드 설정 → 표시 형식 →</b><span>숫자, 1000 단위 구분</span></li>
+      </ol>
+      <div class="box warn">
+        <span class="box-title">⚠ 월 그룹이 안 된다면?</span>
+        → 텍스트 날짜가 남아 있다는 신호, "피벗이 검사관 역할"<br>
+        "그룹으로 묶을 수 없습니다" 메시지 → 텍스트 날짜가 남은 것 → 05 A열 확인 후 새로 고침(Alt+F5)
+      </div>
+
+      <h3>4-4. 지표 확장: 합계 · 평균 · 비율 <span class="slide-no">시간부족: 강사 시연</span></h3>
+      <table class="table">
+        <thead><tr><th>지표</th><th>설정</th><th>알 수 있는 것</th></tr></thead>
+        <tbody>
+          <tr><td><strong>평균</strong></td><td>값 필드 설정 → 요약 기준 "평균"</td><td>1건당 평균 매출</td></tr>
+          <tr><td><strong>비율</strong></td><td>값 표시 형식 → "총합계 비율"</td><td>지점별 매출 비중</td></tr>
+          <tr><td><strong>다차원</strong></td><td>행에 상품분류 추가</td><td>지점 × 분류 교차 분석</td></tr>
+        </tbody>
+      </table>
+      <div class="box note">
+        <span class="box-title">📌 핵심</span>
+        같은 데이터도 지표를 바꾸면 다른 이야기가 보입니다
+      </div>
+
+      <h3>4-5. AI 분석: 사실 / 해석 / 추측 구분하기 <span class="slide-no">활동</span></h3>
+      <div class="prompt">
+        <div class="prompt-head">
+          <span class="label">PROMPT · 피벗 결과 분석 (사실/해석/추측)</span>
+          <button class="copy-btn" onclick="copyPrompt(this)">복사</button>
+        </div>
+        <pre>이 피벗 결과를 ① 객관적 현황 ② 데이터에서 확인되는 특징 ③ 추가 확인 사항으로 정리해줘.
+데이터에 없는 원인은 쓰지 마.  [피벗 수치 붙여넣기]</pre>
+      </div>
+      <table class="table">
+        <thead><tr><th>AI가 쓴 문장</th><th>분류</th><th>근거</th></tr></thead>
+        <tbody>
+          <tr><td>신구점 매출이 가장 높다</td><td>사실</td><td>피벗에서 확인</td></tr>
+          <tr><td>성남점은 4월에 매출이 크게 늘었다</td><td>사실</td><td>피벗에서 확인</td></tr>
+          <tr><td>4월 이벤트 때문에 늘었다</td><td>추측</td><td>데이터에 없음</td></tr>
+        </tbody>
+      </table>
+      <p>[ ] ChatGPT 실제 답변 — <a href="https://chatgpt.com/s/t_6ac30e5262a4819191b11bfb51b6b5cd" target="_blank" rel="noopener">https://chatgpt.com/s/t_6ac30e5262a4819191b11bfb51b6b5cd</a></p>
+      <div class="box tip">
+        <span class="box-title">💡 총합계 2,365,800원이면 성공</span>
+        다르면 원인 후보: 텍스트 날짜 잔존 / 중복 제거 누락 / 매출액 재계산 누락 / 판매 필터 미적용.
+      </div>
+      <div class="box warn">
+        <span class="box-title">⚠ 핵심</span>
+        AI는 해석을 제안할 수 있지만, 근거 없는 원인은 보고서에 쓰지 않습니다
+      </div>
+
+      <h3>4-6. 미션 4 완료: 결과 확인 <span class="slide-no">참고값</span></h3>
+      <p><b>2,365,800원</b> — 판매 매출 합계 (269건)</p>
+      <table class="table">
+        <thead><tr><th>지점</th><th>합계 (원)</th></tr></thead>
+        <tbody>
+          <tr><td>신구점</td><td>1,029,700</td></tr>
+          <tr><td>성남점</td><td>745,600</td></tr>
+          <tr><td>용인점</td><td>590,500</td></tr>
+        </tbody>
+      </table>
+      <p class="muted">※ 권장 정제 기준 적용 값입니다. 정제 기준이 다르면 값이 달라지는 것이 정상입니다.</p>
+    </section>
+
+    <!-- ===================== PART 05 (슬라이드 53~59) ===================== -->
+    <section class="card" id="part5">
+      <h2><span class="num">05</span>데이터 시각화 &amp; 요약 보고서</h2>
+      <p class="lead">미션 5 │ 숫자를 보고서로 바꾸자</p>
+
+      <table class="table">
+        <tbody>
+          <tr><td><strong>흐름</strong></td><td>데이터 → 분석 → 차트 → 보고서</td></tr>
+          <tr><td><strong>결과</strong></td><td>07_대시보드 · 08_AI보고서</td></tr>
+          <tr><td><strong>시간</strong></td><td>15분</td></tr>
+        </tbody>
+      </table>
+
+      <h3>5-1. AI에게 차트 추천받기 <span class="slide-no">실습</span></h3>
+      <div class="prompt">
+        <div class="prompt-head">
+          <span class="label">PROMPT · 차트 추천받기</span>
+          <button class="copy-btn" onclick="copyPrompt(this)">복사</button>
+        </div>
+        <pre>현재 피벗테이블은 월별·지점별 매출을
+비교한 데이터야. 이 데이터를 시각화하려고 해.
+① 추천 차트  ② 추천 이유
+③ 가로축  ④ 세로축  ⑤ 범례
+를 알려줘.</pre>
+      </div>
+      <p><b>목적에 따라 판단하세요</b></p>
+      <table class="table">
+        <thead><tr><th>목적</th><th>차트</th></tr></thead>
+        <tbody>
+          <tr><td><strong>비교</strong></td><td>묶은 세로 막대형</td></tr>
+          <tr><td><strong>추세</strong></td><td>꺾은선형</td></tr>
+          <tr><td><strong>구성비</strong></td><td>원형 (항목이 적을 때)</td></tr>
+        </tbody>
+      </table>
+      <div class="box note">
+        <span class="box-title">📌 AI가 추천했다고 무조건 쓰지는 않습니다</span>
+        목적이 비교인지, 추세인지로 내가 판단합니다
+      </div>
+
+      <h3>5-2. 차트 제작 <span class="slide-no">실습 · 06 피벗 → 07 시트로 차트 이동</span></h3>
+      <p><b>만드는 순서</b></p>
+      <ol class="steps">
+        <li><b>피벗 선택 → 피벗 차트</b></li>
+        <li><b>묶은 세로 막대형</b></li>
+        <li><b>차트 이동 → 07_대시보드</b></li>
+      </ol>
+      <p><b>체크리스트</b></p>
+      <ul>
+        <li>☐ 차트 제목</li>
+        <li>☐ 축 제목 · 단위(원)</li>
+        <li>☐ 범례</li>
+        <li>☐ 한눈에 비교되는가?</li>
+      </ul>
+
+      <h3>5-3. Executive Summary 요청 <span class="slide-no">실습 · 08 시트 · A3에 붙여넣기</span></h3>
+      <div class="prompt">
+        <div class="prompt-head">
+          <span class="label">PROMPT · Executive Summary 요청</span>
+          <button class="copy-btn" onclick="copyPrompt(this)">복사</button>
+        </div>
+        <pre>다음은 Excel에서 직접 계산·검증한 결과야:
+[피벗 수치 붙여넣기]
+1. 현황  2. 인사이트  3. 추가 확인사항 / 실행 과제
+구조로 5문장 이내로 요약해줘.
+데이터에 없는 원인은 쓰지 말고
+"추가 확인 필요"로 표시해줘.</pre>
+      </div>
+      <div class="box tip">
+        <span class="box-title">💡 왜? 파일 전체가 아니라 검증한 숫자만 줍니다</span>
+        AI가 원본을 다시 계산해 다른 숫자를 쓰는 걸 막기 위해서입니다
+      </div>
+      <div class="box note">
+        <span class="box-title">📌 보고서 구조</span>
+        현황 → 인사이트 → 추가 확인 / 실행 과제
+      </div>
+
+      <h3>5-4. FACT CHECK: 최종 판단은 나 <span class="slide-no">실습 · 08 시트 · 문장마다 확인</span></h3>
+      <p><b>AI 보고서 초안</b> (08_AI보고서에 붙여넣기) → <b>학생 FACT CHECK</b> → <b>최종 보고서</b></p>
+      <p><b>FACT CHECK 목록</b></p>
+      <ul>
+        <li>☐ 숫자가 피벗과 일치하는가</li>
+        <li>☐ 기간(3~5월)이 맞는가</li>
+        <li>☐ 지점명이 정확한가</li>
+        <li>☐ 근거 없는 원인을 삭제했는가</li>
+        <li>☐ 표현을 내 말로 다듬었는가</li>
+      </ul>
+
+      <h3>5-5. 한 장의 인포그래픽으로 보기 <span class="slide-no">08 시트 · 문장마다 확인</span></h3>
+      <div class="prompt">
+        <div class="prompt-head">
+          <span class="label">PROMPT · 보고서 인포그래픽</span>
+          <button class="copy-btn" onclick="copyPrompt(this)">복사</button>
+        </div>
+        <pre>위 사항을 보고서 형식의 한장의 인포그래픽으로 보여줘</pre>
+      </div>
+      <figure class="fig">
+        <img src="img/s58_infographic.png" alt="월별·지점별 판매 매출 비교 인포그래픽 결과 예시" loading="lazy">
+        <figcaption>결과 예시 — 월별·지점별 판매 매출 비교 (주문상태 = 판매, 3월~5월)</figcaption>
+      </figure>
+
+      <h3>5-6. 최종 산출물 확인 <span class="slide-no">짝 활동 1분</span></h3>
+      <table class="table">
+        <thead><tr><th>시트</th><th>산출물</th><th>상태</th></tr></thead>
+        <tbody>
+          <tr><td><strong>05</strong></td><td>정제 데이터</td><td>☐ 완료</td></tr>
+          <tr><td><strong>06</strong></td><td>피벗 분석</td><td>☐ 완료</td></tr>
+          <tr><td><strong>07</strong></td><td>차트</td><td>☐ 완료</td></tr>
+          <tr><td><strong>08</strong></td><td>요약 보고서</td><td>☐ 완료</td></tr>
+        </tbody>
+      </table>
+      <div class="box tip">
+        <span class="box-title">💡 짝과 파일을 바꿔서</span>
+        보고서의 숫자 1개를 피벗에서 직접 찾아 확인해 보세요
+      </div>
+    </section>
+
+    <!-- ===================== 함수 카드 (슬라이드 60) ===================== -->
+    <section class="card" id="funcs">
+      <h2><span class="num">02+</span>함수 카드: 보지 않고 설명할 수 있으면 마스터</h2>
+      <p class="lead">14개 · 주인공 4개 IF · XLOOKUP · COUNTIF · SUMIFS | 색: 판정 · 찾기 · 정리 · 합계 | ( ) 안은 슬라이드 번호</p>
+
+      <div class="table-scroll">
+      <table class="table">
+        <thead><tr><th>함수</th><th>한 문장 비유</th><th>형식</th><th>오늘의 예 (슬라이드)</th><th>흔한 실수</th></tr></thead>
+        <tbody>
+          <tr><td><strong>IF</strong></td><td>"~이면 A, 아니면 B" 갈림길</td><td>IF(조건, 참, 거짓)</td><td>매출 판정: 09 D6 (21), 05 N2 (22~23)</td><td>따옴표 없이 정상 입력 → #NAME?</td></tr>
+          <tr><td><strong>COUNT</strong></td><td>숫자인 칸만 세는 출석 체크</td><td>COUNT(범위)</td><td>빈칸·글자 숫자 감지: 05 N2 (23)</td><td>글자 숫자도 셀 거라고 착각</td></tr>
+          <tr><td><strong>ISNUMBER</strong></td><td>"이게 숫자야?" 예/아니오</td><td>ISNUMBER(값)</td><td>진짜 날짜인지: Q2 (39), 조건부 서식 (42)</td><td>글자 날짜도 TRUE일 거라 착각</td></tr>
+          <tr><td><strong>OR · NOT</strong></td><td>하나라도 맞으면 참 / 반대로 뒤집기</td><td>OR(조건1, …) · NOT(조건)</td><td>문제 행 칠하기: 조건부 서식 (42)</td><td>AND와 혼동, 괄호 위치 실수</td></tr>
+          <tr><td><strong>XLOOKUP</strong></td><td>학번으로 이름 찾기</td><td>XLOOKUP(값, 찾을 범위, 가져올 범위, 없을 때)</td><td>B20 (24), M2 (26), R2~T2 (40~41)</td><td>범위 고정(F4) 빠뜨림</td></tr>
+          <tr><td><strong>COUNTIF</strong></td><td>"나랑 똑같은 사람 몇 명?"</td><td>COUNTIF(범위, 조건)</td><td>중복 P2 (28), Master 확인 S2 (40~41)</td><td>범위를 고정하지 않음</td></tr>
+          <tr><td><strong>SUBSTITUTE</strong></td><td>찾아 바꾸기의 함수 버전</td><td>SUBSTITUTE(텍스트, 바꿀 것, 새 것)</td><td>공백 제거 S2 (40~41), 날짜 Q2 (39)</td><td>따옴표 사이 공백 한 칸 빼먹음</td></tr>
+          <tr><td><strong>TRIM</strong></td><td>앞뒤 공백 정리</td><td>TRIM(텍스트)</td><td>한계 시연 (28)</td><td>가운데 공백도 지울 거라 착각</td></tr>
+          <tr><td><strong>TEXTJOIN</strong></td><td>여러 칸을 한 줄로 이어 붙이기</td><td>TEXTJOIN(구분자, 빈칸무시, 범위)</td><td>중복키 O2 (28)</td><td>TRUE로 해서 빈칸 위치 정보가 사라짐</td></tr>
+          <tr><td><strong>DATEVALUE</strong></td><td>날짜처럼 생긴 글자 → 진짜 날짜</td><td>DATEVALUE(텍스트)</td><td>텍스트 날짜 변환 Q2 (39)</td><td>PC 지역 설정에 따라 실패 가능</td></tr>
+          <tr><td><strong>IFERROR</strong></td><td>오류 나면 대신 이걸 보여줘</td><td>IFERROR(수식, 대체값)</td><td>변환 실패 시 확인필요 Q2 (39)</td><td>진짜 문제를 숨기는 데 남용</td></tr>
+          <tr><td><strong>SUMIFS</strong></td><td>조건 맞는 영수증만 모아 합계</td><td>SUMIFS(더할 범위, 조건 범위1, 조건1, …)</td><td>09 M33 (29), 05 W2 (30)</td><td>조건 칸의 글자 때문에 0</td></tr>
+          <tr><td><strong>DATE</strong></td><td>연·월·일로 진짜 날짜 만들기</td><td>DATE(연, 월, 일)</td><td>SUMIFS 날짜 조건 W2 (30)</td><td>"&gt;="와 DATE를 &amp;로 안 붙임</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+
+    <!-- ===================== CLOSING (슬라이드 61~63) ===================== -->
+    <section class="card" id="wrap">
+      <h2><span class="num">06</span>CLOSING · 마무리</h2>
+      <p class="lead">AI에게 맡기는 것이 아니라, AI와 Excel의 역할을 나눈다</p>
+
+      <h3>오늘의 업무 방식</h3>
+      <ol class="steps">
+        <li><b>문제 정의</b></li>
+        <li><b>AI 질문</b></li>
+        <li><b>테스트</b></li>
+        <li><b>Excel 실행</b></li>
+        <li><b>검증</b></li>
+        <li><b>AI 분석</b></li>
+        <li><b>최종 판단</b></li>
+      </ol>
+      <div class="box tip">
+        <span class="box-title">💡 가져갈 카드: 수식·분석 프롬프트 공식</span>
+        버전 + 위치 + 결과 + 예외 + 설명 + 추측 금지
+      </div>
+      <div class="box note">
+        <span class="box-title">📌 AI가 알려준 것은 후보, Excel이 계산한 것은 근거,</span>
+        최종 판단은 나
+      </div>
+
+      <h3>오늘의 한 문장</h3>
+      <div class="box note">
+        <span class="box-title">AI에게 맡기는 것이 스마트한 Excel이 아니다.</span>
+        AI와 Excel의 역할을 나누는 것이 스마트한 Excel이다.
+      </div>
+      <p><b>AI가 알려준다 → 내가 실행한다 → 내가 검증한다</b></p>
+      <p>Q &amp; A · Thank you</p>
+    </section>
+
+    <!-- ===================== 부록 (슬라이드 64~66) ===================== -->
+    <section class="card" id="appendix">
+      <h2><span class="num">+</span>부록 · 강사 참고</h2>
+      <p class="lead">강의안 설명 캡처 (원래 슬라이드 번호 기준)</p>
+
+      <h3>미션 1 정답표 캡처 <span class="slide-no">원래 13번 슬라이드</span></h3>
+      <figure class="fig">
+        <img src="img/appendix1_mission1.png" alt="미션 1 비교표 정답 캡처" loading="lazy">
+      </figure>
+
+      <h3>오류 코드 시연 설명 캡처 <span class="slide-no">원래 24번 슬라이드</span></h3>
+      <figure class="fig">
+        <img src="img/appendix2_error_demo.png" alt="오류 코드 교정 시연 설명 캡처" loading="lazy">
+      </figure>
+
+      <h3>중복 찾기 설명 캡처 <span class="slide-no">원래 25번 슬라이드</span></h3>
+      <figure class="fig">
+        <img src="img/appendix3_duplicate.png" alt="텍스트 정리·중복 찾기 설명 캡처" loading="lazy">
+      </figure>
+    </section>
+
+  </div>
+</main>
+
+<footer id="site-footer"></footer>
+
+<div id="toast">복사되었습니다 ✓</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+<script>initSessionPage(1);</script>
+
+</body>
+</html>
