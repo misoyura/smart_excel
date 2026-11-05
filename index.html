@@ -4,53 +4,86 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ChatGPT와 함께하는 스마트 엑셀 · 강의 자료실</title>
+<meta name="description" content="AI에게 묻고, Excel에서 실행하고, 결과를 검증하다 — 신구대학교 재학생 특강 강의 자료실">
 <link rel="stylesheet" href="style.css">
 </head>
 <body class="page-index">
 
-<div class="statusbar"></div>
-
 <header class="hero">
   <div class="wrap">
-    <span class="logo"></span>
-    <h1>ChatGPT와 함께하는 스마트 엑셀</h1>
-    <p>AI에게 묻고, Excel에서 실행하고, 결과를 검증하다</p>
-    <p class="meta"></p>
+    <span class="kicker">신구대학교 · 재학생 특강 · 150분 실습</span>
+    <h1>AI에게 묻고,<br><em>Excel에서 실행</em>하고,<br>결과를 검증하다</h1>
+    <p class="sub">100행짜리 지저분한 매출 데이터를 ChatGPT와 함께 진단 · 정제 · 분석하고, 보고서까지 완성하는 스마트 엑셀 실습 자료실입니다. 모든 실습 프롬프트는 복사 버튼 한 번으로 바로 붙여넣을 수 있습니다.</p>
+    <div class="hero-chips">
+      <span class="instructor">강사 <b>김유라</b></span>
+      <span>ChatGPT · Excel 2021</span>
+      <span>신구대학교 재학생 특강</span>
+    </div>
+    <div class="hero-cta">
+      <a class="btn primary" href="#downloads">⬇ 실습 파일 받기</a>
+      <a class="btn" href="session_0.html">강의 시작하기</a>
+      <a class="btn" href="prompts.html">✦ 프롬프트·함수 라이브러리</a>
+    </div>
+    <div class="hero-stats">
+      <div><strong>5</strong><span>MISSION</span></div>
+      <div><strong id="stat-prompts">15</strong><span>실습 프롬프트</span></div>
+      <div><strong>14</strong><span>핵심 함수 카드</span></div>
+      <div><strong>150분</strong><span>전체 실습 시간</span></div>
+    </div>
   </div>
 </header>
 
 <main>
   <div class="wrap">
 
-    <section id="sessions">
-      <div class="sec-title">
-        <span class="dot"></span>
-        <h2>강의 목차</h2>
-        <span class="hint">카드를 누르면 해당 차시로 이동</span>
+    <section class="sec" id="sessions">
+      <div class="sec-head">
+        <div><span class="eyebrow-s">Course</span><h2>강의 목차</h2></div>
+        <p>카드를 누르면 해당 파트의 강의안으로 이동합니다</p>
       </div>
-
-      <!-- 차시 추가 방법: data.js의 SESSIONS 배열에 항목을 추가하면 이 카드 목록에 자동 반영됩니다. -->
-      <div class="grid" id="session-grid"></div>
+      <div class="part-grid" id="session-grid"></div>
     </section>
 
-    <section id="downloads">
-      <div class="sec-title">
-        <span class="dot"></span>
-        <h2>실습자료 다운로드</h2>
+    <section class="sec" id="flow">
+      <div class="sec-head">
+        <div><span class="eyebrow-s">Schedule</span><h2>오늘의 일정</h2></div>
+        <p>문제 발견 → AI에게 질문 → Excel 실행 → 결과 검증 → 분석 → 보고서</p>
+      </div>
+      <div class="tiles">
+        <div class="tile"><span class="t-no">01</span><b>AI로 데이터 문제 진단</b><span>미션 1 · 20분</span></div>
+        <div class="tile"><span class="t-no">02</span><b>AI 수식 생성·검증</b><span>미션 2 · 40분</span></div>
+        <div class="tile"><span class="t-no">03</span><b>데이터 정제 및 구조 표준화</b><span>미션 3 · 30분 (휴식 10분 후)</span></div>
+        <div class="tile"><span class="t-no">04</span><b>매출 분석 &amp; 피벗테이블</b><span>미션 4 · 20분</span></div>
+        <div class="tile"><span class="t-no">05</span><b>시각화 &amp; 요약 보고서</b><span>미션 5 · 15분</span></div>
+      </div>
+    </section>
+
+    <section class="sec" id="downloads">
+      <div class="sec-head">
+        <div><span class="eyebrow-s">Download</span><h2>실습 자료 다운로드</h2></div>
+        <p>실습은 학생용 파일로 진행합니다</p>
       </div>
 
-      <div class="dl-group">
-        <div class="dl-row">
-          <span class="fname">🗂 실습 파일 · AI_스마트엑셀_학생용_실습데이터.xlsx</span>
-          <a class="dl-btn" href="files/smart_excel_practice.xlsx" download="AI_스마트엑셀_학생용_실습데이터.xlsx">다운로드</a>
+      <div class="file-sets">
+        <div class="file-set">
+          <div class="file-set-head"><span class="set-no">1</span><b>AI 스마트엑셀 실습 데이터 (100행)</b><span class="set-tag">학생용</span></div>
+          <a class="file-row" href="files/student_practice_100.xlsx" download="AI_스마트엑셀_학생용_실습데이터_100행.xlsx">
+            <span class="file-ico">XLSX</span>
+            <span class="file-name">AI_스마트엑셀_학생용_실습데이터_100행.xlsx<small>01_실습안내 ~ 10_확인필요 · 약 30KB</small></span>
+            <span class="file-dl">다운로드 ↓</span>
+          </a>
         </div>
-        <div class="dl-row">
-          <span class="fname">✅ 결과물 · 결과물_AI_스마트엑셀_학생용_실습데이터_최종_답안.xlsx</span>
-          <a class="dl-btn" href="files/smart_excel_answer.xlsx" download="결과물_AI_스마트엑셀_학생용_실습데이터_최종_답안.xlsx">다운로드</a>
+        <div class="file-set">
+          <div class="file-set-head"><span class="set-no">2</span><b>AI 스마트엑셀 정답 데이터 (100행)</b><span class="set-tag ins">강사용</span></div>
+          <a class="file-row" href="files/instructor_answer_100.xlsx" download="AI_스마트엑셀_강사용_정답데이터_100행.xlsx">
+            <span class="file-ico">XLSX</span>
+            <span class="file-name">AI_스마트엑셀_강사용_정답데이터_100행.xlsx<small>정제 결과 확인·비교용 · 약 39KB</small></span>
+            <span class="file-dl">다운로드 ↓</span>
+          </a>
         </div>
       </div>
 
-      <p class="notice">※ 실습은 학생용 실습데이터 파일로 진행하고, 결과물(최종 답안) 파일은 실습 후 내 결과와 비교할 때 사용하세요.</p>
+      <p class="notice"><b>시작 전 확인</b> · ☐ 실습 파일 열기 &nbsp; ☐ ChatGPT 로그인 &nbsp; ☐ 파일 업로드 버튼 확인<br><b>02_매출원본 시트는 절대 수정하지 않고</b>, 05_정제데이터에 복사해서 작업하세요.</p>
     </section>
 
   </div>

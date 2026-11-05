@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>마무리 · 오늘의 업무 방식 · ChatGPT와 함께하는 스마트 엑셀</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="page-session">
+
+<div class="statusbar"></div>
+
+<header class="header">
+  <div class="wrap">
+    <span class="logo"></span>
+    <p class="eyebrow"></p>
+    <h1>오늘의 업무 방식</h1>
+    <p class="subtitle">AI가 알려준 것은 후보, Excel이 계산한 것은 근거, 최종 판단은 나</p>
+    <span class="guide">💡 가져갈 프롬프트·수식은 라이브러리에서 복사해 쓰세요</span>
+  </div>
+</header>
+
+<nav class="nav" id="site-nav"></nav>
+
+<main>
+  <div class="wrap">
+
+    <section class="card" id="way">
+      <h2><span class="num">01</span>오늘의 업무 방식</h2>
+      <div class="flow">
+        <div class="st">문제 정의</div><span class="ar">→</span>
+        <div class="st">AI 질문</div><span class="ar">→</span>
+        <div class="st">테스트</div><span class="ar">→</span>
+        <div class="st">Excel 실행</div><span class="ar">→</span>
+        <div class="st">검증</div><span class="ar">→</span>
+        <div class="st">AI 분석</div><span class="ar">→</span>
+        <div class="st">최종 판단</div>
+      </div>
+      <div class="cols">
+        <div class="mini ai"><h4>AI가 알려준 것은</h4><p class="big">후보</p></div>
+        <div class="mini xl"><h4>Excel이 계산한 것은</h4><p class="big">근거</p></div>
+        <div class="mini stu"><h4>최종 판단은</h4><p class="big">나</p></div>
+      </div>
+    </section>
+
+    <section class="card" id="card">
+      <h2><span class="num">02</span>가져갈 카드: 수식·분석 프롬프트 공식</h2>
+      <div class="principle" style="font-size:16px">
+        <em>버전</em> + <em class="b">위치</em> + <em class="g">결과</em> + 예외 + 설명 + 추측 금지
+      </div>
+      <div class="hero-cta" style="justify-content:flex-start">
+        <a class="btn primary" href="prompts.html">✨ 프롬프트·함수 라이브러리 열기</a>
+        <a class="btn" href="prompts.html#func">함수 카드 14 보기</a>
+        <a class="btn" href="index.html#downloads">⬇ 실습 파일 받기</a>
+      </div>
+    </section>
+
+    <section class="card" id="one">
+      <h2><span class="num">03</span>오늘의 한 문장</h2>
+      <div class="big-answer" style="font-size:20px;line-height:1.6">
+        AI에게 맡기는 것이 스마트한 Excel이 아니다.<br>
+        AI와 Excel의 <span class="hl">역할을 나누는 것</span>이 스마트한 Excel이다.
+      </div>
+      <div class="principle"><em>AI가 알려준다</em> → <em class="b">내가 실행한다</em> → <em class="g">내가 검증한다</em></div>
+      <p class="center big" style="margin-top:22px">Q &amp; A · Thank you</p>
+    </section>
+
+    <div class="pager" id="pager"></div>
+  </div>
+</main>
+
+<footer id="site-footer"></footer>
+<div id="toast">복사되었습니다 ✓</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+<script>initSessionPage(6);</script>
+
+</body>
+</html>
