@@ -16,7 +16,7 @@ const SESSIONS = [
   {
     id: 0, tab: "오프닝", title: "이 데이터, 믿어도 될까요?",
     subtitle: "오늘의 흐름 · 역할 분담 · 함수 지도 · 실습 파일 살펴보기",
-    desc: "눈으로는 같아 보이는 데이터가 Excel에서는 왜 다르게 계산될까? 오늘의 4가지 결과물과 AI·학생·Excel·강사의 역할을 확인합니다.",
+    desc: "눈으로는 같아 보이는 데이터가 Excel에서는 왜 다르게 계산될까? 오늘의 4가지 결과물과 AI·사람·Excel의 역할을 확인합니다.",
     time: "", href: "session_0.html",
     anchors: [
       { href: "#hook", label: "이 데이터 믿어도 될까" },
