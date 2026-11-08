@@ -34,15 +34,15 @@ a{color:inherit}
   background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
   background-size:56px 56px;mask-image:linear-gradient(180deg,#000 30%,transparent 95%);-webkit-mask-image:linear-gradient(180deg,#000 30%,transparent 95%)}
 .hero .wrap{position:relative;z-index:1}
-.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:40px;align-items:end}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:40px;align-items:start}
 .org-logo{display:inline-flex;align-items:center;background:#fff;border-radius:12px;padding:9px 16px;margin-bottom:22px;box-shadow:0 6px 20px rgba(0,0,0,.18)}
 .org-logo img{display:block;height:34px;width:auto}
-.hero-photo{position:relative;margin:0 0 -120px;align-self:end}
-.hero-photo::before{content:"";position:absolute;left:8%;right:8%;bottom:0;height:70%;border-radius:200px 200px 0 0;background:radial-gradient(circle at 50% 30%,rgba(212,180,131,.35),rgba(212,180,131,.06) 70%);z-index:-1}
-.hero-photo img{display:block;width:100%;height:auto;max-height:380px;object-fit:contain;object-position:bottom}
+.hero-photo{position:relative;margin:30px 0 0;align-self:start;overflow:hidden;border-radius:0 0 24px 24px;border-bottom:1px solid rgba(212,180,131,.45)}
+.hero-photo::before{content:"";position:absolute;left:6%;right:6%;bottom:0;height:72%;border-radius:200px 200px 0 0;background:radial-gradient(circle at 50% 30%,rgba(212,180,131,.35),rgba(212,180,131,.06) 70%);z-index:-1}
+.hero-photo img{display:block;width:100%;height:auto;max-height:310px;object-fit:contain;object-position:bottom}
 .hero-photo figcaption{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);white-space:nowrap;padding:7px 16px;border-radius:999px;background:rgba(11,22,40,.78);border:1px solid rgba(212,180,131,.55);color:rgba(255,255,255,.9);font-size:14px;backdrop-filter:blur(6px)}
 .hero-photo figcaption b{color:#fff}
-@media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:28px}.hero-photo{width:200px;justify-self:center}.hero-photo img{max-height:270px}}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:28px}.hero-photo{width:180px;justify-self:center;margin:0}.hero-photo img{max-height:240px}}
 @media(max-width:640px){.org-logo img{height:28px}.org-logo{padding:7px 13px}}
 .kicker{display:inline-flex;align-items:center;gap:10px;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-2);font-weight:600}
 .kicker::before{content:"";width:28px;height:1px;background:var(--gold-2)}
