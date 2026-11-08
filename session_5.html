@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PART 5 · 데이터 시각화 &amp; 요약 보고서 · ChatGPT와 함께하는 스마트 엑셀</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="page-session">
+
+<div class="statusbar"></div>
+
+<header class="header">
+  <div class="wrap">
+    <span class="logo"></span>
+    <p class="eyebrow"></p>
+    <h1>데이터 시각화 &amp; 요약 보고서</h1>
+    <p class="subtitle">미션 5 │ 숫자를 보고서로 바꾸자</p>
+    <div class="meta-chips">
+      <span class="chip time">⏱ 15분</span>
+      <span class="chip">데이터 → 분석 → 차트 → 보고서</span>
+      <span class="chip out">결과: 07_대시보드 · 08_AI보고서</span>
+    </div>
+    <span class="guide">💡 실습 프롬프트는 복사 버튼으로 붙여넣으세요</span>
+  </div>
+</header>
+
+<nav class="nav" id="site-nav"></nav>
+
+<main>
+  <div class="wrap">
+
+    <section class="card" id="intro">
+      <h2><span class="num">00</span>미션 5 개요</h2>
+      <div class="cols">
+        <div class="mini"><h4>흐름</h4><p>데이터 → 분석 → 차트 → 보고서</p></div>
+        <div class="mini"><h4>결과</h4><p>07_대시보드<br>08_AI보고서</p></div>
+        <div class="mini"><h4>시간</h4><p>15분</p></div>
+      </div>
+    </section>
+
+    <section class="card" id="chart-ask">
+      <h2><span class="num">01</span>AI에게 차트 추천받기</h2>
+      <p class="lead"><span class="chip time">실습</span></p>
+
+      <div data-prompt="p12"></div>
+
+      <h3>목적에 따라 판단하세요</h3>
+      <div class="cols">
+        <div class="mini"><h4>비교</h4><p><b>묶은 세로 막대형</b></p></div>
+        <div class="mini"><h4>추세</h4><p><b>꺾은선형</b></p></div>
+        <div class="mini"><h4>구성비</h4><p><b>원형</b> (항목이 적을 때)</p></div>
+      </div>
+      <div class="box note">AI가 추천했다고 무조건 쓰지는 않습니다. 목적이 <b>비교인지, 추세인지</b>로 내가 판단합니다.</div>
+    </section>
+
+    <section class="card" id="chart">
+      <h2><span class="num">02</span>차트 제작</h2>
+      <p class="lead"><span class="chip time">실습</span> <span class="sheetref">06 피벗 → 07 시트로 차트 이동</span></p>
+
+      <h3>만드는 순서</h3>
+      <ol class="steps">
+        <li><b>피벗 선택 → 피벗 차트</b></li>
+        <li><b>묶은 세로 막대형</b></li>
+        <li><b>차트 이동 → 07_대시보드</b></li>
+      </ol>
+
+      <h3>체크리스트</h3>
+      <ul class="check">
+        <li>차트 제목</li>
+        <li>축 제목 · 단위(원)</li>
+        <li>범례</li>
+        <li>한눈에 비교되는가?</li>
+      </ul>
+    </section>
+
+    <section class="card" id="summary">
+      <h2><span class="num">03</span>Executive Summary 요청</h2>
+      <p class="lead"><span class="chip time">실습</span> <span class="sheetref">08 시트 · A3에 붙여넣기</span></p>
+
+      <div data-prompt="p13"></div>
+
+      <div class="box tip">
+        <span class="box-title">❓ 왜 검증한 숫자만 줄까요?</span>
+        파일 전체가 아니라 <b>검증한 숫자만</b> 줍니다. AI가 원본을 다시 계산해 다른 숫자를 쓰는 걸 막기 위해서입니다.
+      </div>
+
+      <h3>보고서 구조</h3>
+      <div class="flow">
+        <div class="st">현황</div><span class="ar">→</span>
+        <div class="st">인사이트</div><span class="ar">→</span>
+        <div class="st">추가 확인 / 실행 과제</div>
+      </div>
+    </section>
+
+    <section class="card" id="visual">
+      <h2><span class="num">04</span>인포그래픽 · PPT로 확장하기</h2>
+      <p class="lead"><span class="sheetref">08 시트 · 문장마다 확인</span> 위 보고서에 이어서 요청합니다.</p>
+
+      <h3>① 인포그래픽</h3>
+      <div data-prompt="p14"></div>
+
+      <h3>② PPT 제작</h3>
+      <div data-prompt="p15"></div>
+    </section>
+
+    <section class="card" id="fact">
+      <h2><span class="num">05</span>FACT CHECK: 최종 판단은 나</h2>
+      <p class="lead"><span class="chip time">실습</span> <span class="sheetref">08 시트 · 문장마다 확인</span></p>
+
+      <div class="flow">
+        <div class="st">AI 보고서 초안<small>08_AI보고서에 붙여넣기</small></div><span class="ar">→</span>
+        <div class="st"><span class="role stu">학생</span> FACT CHECK</div><span class="ar">→</span>
+        <div class="st">최종 보고서</div>
+      </div>
+
+      <h3>FACT CHECK 목록</h3>
+      <ul class="check">
+        <li>숫자가 피벗과 일치하는가</li>
+        <li>기간(3~5월)이 맞는가</li>
+        <li>지점명이 정확한가</li>
+        <li>근거 없는 원인을 삭제했는가</li>
+        <li>표현을 내 말로 다듬었는가</li>
+      </ul>
+    </section>
+
+    <section class="card" id="final">
+      <h2><span class="num">06</span>최종 산출물 확인</h2>
+      <p class="lead"><span class="chip time">짝 활동 1분</span></p>
+      <div class="cols">
+        <div class="mini xl"><span class="no">05</span><h4>정제 데이터</h4><p class="good">완료</p></div>
+        <div class="mini xl"><span class="no">06</span><h4>피벗 분석</h4><p class="good">완료</p></div>
+        <div class="mini xl"><span class="no">07</span><h4>차트</h4><p class="good">완료</p></div>
+        <div class="mini xl"><span class="no">08</span><h4>요약 보고서</h4><p class="good">완료</p></div>
+      </div>
+      <div class="box note">짝과 파일을 바꿔서 <b>보고서의 숫자 1개</b>를 피벗에서 직접 찾아 확인해 보세요.</div>
+    </section>
+
+    <div class="pager" id="pager"></div>
+  </div>
+</main>
+
+<footer id="site-footer"></footer>
+<div id="toast">복사되었습니다 ✓</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+<script>initSessionPage(5);</script>
+
+</body>
+</html>

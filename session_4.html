@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PART 4 · 매출 분석 &amp; 피벗테이블 · ChatGPT와 함께하는 스마트 엑셀</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="page-session">
+
+<div class="statusbar"></div>
+
+<header class="header">
+  <div class="wrap">
+    <span class="logo"></span>
+    <p class="eyebrow"></p>
+    <h1>매출 분석 &amp; 피벗테이블</h1>
+    <p class="subtitle">미션 4 │ 정리된 데이터로 매출을 분석하자</p>
+    <div class="meta-chips">
+      <span class="chip time">⏱ 20분</span>
+      <span class="chip">질문: 지점별 · 월별 · 상품분류별 매출은?</span>
+      <span class="chip out">결과: 06_피벗분석</span>
+    </div>
+    <span class="guide">💡 실습 프롬프트는 복사 버튼으로 붙여넣으세요</span>
+  </div>
+</header>
+
+<nav class="nav" id="site-nav"></nav>
+
+<main>
+  <div class="wrap">
+
+    <section class="card" id="intro">
+      <h2><span class="num">00</span>미션 4 개요</h2>
+      <div class="cols">
+        <div class="mini"><h4>질문</h4><p>지점별 · 월별 · 상품분류별 매출은?</p></div>
+        <div class="mini"><h4>결과</h4><p>06_피벗분석</p></div>
+        <div class="mini"><h4>시간</h4><p>20분</p></div>
+      </div>
+    </section>
+
+    <section class="card" id="table">
+      <h2><span class="num">01</span>분석 준비: 표로 변환</h2>
+      <p class="lead"><span class="chip time">실습</span> <span class="sheetref">05 시트 · 3행 삭제 → 표(Ctrl+T)</span></p>
+
+      <ol class="steps">
+        <li><b>확인필요 3행 처리 (삭제 또는 표시)</b><span>마지막 행 93 (데이터 92행) 확인</span></li>
+        <li><b>데이터 안 아무 셀 클릭</b></li>
+        <li><b><kbd>Ctrl</kbd>+<kbd>T</kbd> → "머리글 포함" 체크 → 확인</b></li>
+      </ol>
+
+      <h3>왜 표로 만들까요?</h3>
+      <ul class="list">
+        <li>데이터가 늘어나도 <b>피벗 범위가 자동으로 확장</b>됩니다.</li>
+        <li>필터·서식이 자동 적용됩니다.</li>
+      </ul>
+
+      <h3>확인하기</h3>
+      <ul class="check">
+        <li>'표 디자인' 탭이 나타나면 성공</li>
+        <li>표 이름을 "매출"로 바꿔 두면 편리</li>
+        <li>표 범위가 A1:Q93 (W열은 포함되지 않아야 함)</li>
+      </ul>
+      <div class="box ok">정리된 데이터 + 표 구조 = <b>분석할 준비 완료</b></div>
+
+      <div class="box tip">
+        <span class="box-title">🧾 피벗을 쓰는 이유?</span>
+        영수증 92장을 바닥에 펼쳐놓고, 지점별로 줄 세우고, 월별로 칸을 나눠서, 금액을 더하는 일은 Excel이 1초만에 해줍니다.<br>
+        <b>행</b>: 줄 세울 기준 · <b>열</b>: 칸 나눌 기준 · <b>값</b>: 더할 숫자 · <b>필터</b>: 빼고 볼 것
+      </div>
+    </section>
+
+    <section class="card" id="ask">
+      <h2><span class="num">02</span>AI에게 피벗 구조 묻기</h2>
+      <p class="lead"><span class="role stu">학생</span> 직접 프롬프트 작성·전송 (틀만 제공)</p>
+
+      <div data-prompt="p10"></div>
+
+      <h3>채울 내용 힌트</h3>
+      <ul class="list">
+        <li><b>목적:</b> 월별·지점별 매출 비교</li>
+        <li><b>필드:</b> 주문일자, 지점명, 상품분류, 주문상태, 매출액 …</li>
+      </ul>
+    </section>
+
+    <section class="card" id="pivot">
+      <h2><span class="num">03</span>피벗테이블 만들기</h2>
+      <p class="lead"><span class="chip time">실습</span> <span class="sheetref">06 시트 · A3에 피벗</span></p>
+
+      <h3>피벗 필드 배치</h3>
+      <div class="cols">
+        <div class="mini"><h4>필터</h4><p>주문상태 = <b>판매</b></p></div>
+        <div class="mini"><h4>열</h4><p>주문일자 (월)</p></div>
+        <div class="mini"><h4>행</h4><p>지점명</p></div>
+        <div class="mini"><h4>값</h4><p>합계 : 매출액</p></div>
+      </div>
+
+      <h3>만드는 순서</h3>
+      <ol class="steps">
+        <li><b>표 안 클릭 → 삽입 → 피벗 테이블</b><span>표/범위: 매출</span></li>
+        <li><b>기존 워크시트 → 06_피벗분석 A3</b></li>
+        <li><b>필드 배치</b><span>필터=주문상태(판매만) / 열=주문일자 / 행=지점명 / 값=합계: 매출액</span></li>
+        <li><b>날짜가 일 단위로 펼쳐지면</b><span>날짜 셀 우클릭 → 그룹 → "월"만 선택(일 해제) → 확인</span></li>
+        <li><b>값 서식 지정</b><span>값 우클릭 → 값 필드 설정 → 표시 형식 → 숫자, 1000 단위 구분</span></li>
+      </ol>
+
+      <div class="box warn">
+        <span class="box-title">월 그룹이 안 된다면?</span>
+        텍스트 날짜가 남아 있다는 신호입니다 — <b>"피벗이 검사관 역할"</b><br>
+        "그룹으로 묶을 수 없습니다" 메시지 → 텍스트 날짜가 남은 것 → 05 A열 확인 후 새로 고침 (<kbd>Alt</kbd>+<kbd>F5</kbd>)
+      </div>
+    </section>
+
+    <section class="card" id="metric">
+      <h2><span class="num">04</span>지표 확장: 합계 · 평균 · 비율</h2>
+      <p class="lead"><span class="role ins">시간 부족 시 강사 시연</span></p>
+      <div class="cols">
+        <div class="mini"><h4>평균</h4><p>값 필드 설정 → 요약 기준 "평균"</p><p class="muted">→ 1건당 평균 매출</p></div>
+        <div class="mini"><h4>비율</h4><p>값 표시 형식 → "총합계 비율"</p><p class="muted">→ 지점별 매출 비중</p></div>
+        <div class="mini"><h4>다차원</h4><p>행에 상품분류 추가</p><p class="muted">→ 지점 × 분류 교차 분석</p></div>
+      </div>
+      <div class="box note">같은 데이터도 <b>지표를 바꾸면 다른 이야기</b>가 보입니다.</div>
+    </section>
+
+    <section class="card" id="fact">
+      <h2><span class="num">05</span>AI 분석: 사실 / 해석 / 추측 구분하기</h2>
+      <p class="lead"><span class="chip time">활동</span></p>
+
+      <div data-prompt="p11"></div>
+
+      <h3>AI가 쓴 문장을 직접 분류해 보세요</h3>
+      <div class="tbl-wrap"><table class="table">
+        <thead><tr><th>AI가 쓴 문장</th><th>분류</th><th>근거</th></tr></thead>
+        <tbody>
+          <tr><td>신구점 매출이 가장 높다</td><td class="good">사실</td><td>피벗에서 확인</td></tr>
+          <tr><td>성남점은 4월에 매출이 크게 늘었다</td><td class="good">사실</td><td>피벗에서 확인</td></tr>
+          <tr><td>4월 이벤트 때문에 늘었다</td><td class="bad">추측</td><td>데이터에 없음</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="box ok">
+        <span class="box-title">🎯 총합계 926,000원이면 성공</span>
+        다르면 원인 후보: <b>텍스트 날짜 잔존</b> / <b>중복 제거 누락</b> / <b>매출액 재계산 누락</b> / <b>판매 필터 미적용</b>
+      </div>
+      <div class="box note">AI는 해석을 제안할 수 있지만, <b>근거 없는 원인은 보고서에 쓰지 않습니다.</b></div>
+    </section>
+
+    <section class="card" id="result">
+      <h2><span class="num">06</span>미션 4 완료: 결과 확인</h2>
+      <div class="kpi">
+        <div><b>926,000원</b><span>판매 매출 합계 (87건) · 참고값</span></div>
+      </div>
+      <div class="tbl-wrap"><table class="table">
+        <thead><tr><th>지점</th><th class="num">합계 (원)</th></tr></thead>
+        <tbody>
+          <tr><td><strong>신구점</strong></td><td class="num">347,200</td></tr>
+          <tr><td><strong>성남점</strong></td><td class="num">313,800</td></tr>
+          <tr><td><strong>용인점</strong></td><td class="num">265,000</td></tr>
+        </tbody>
+      </table></div>
+      <p class="muted">※ 권장 정제 기준 적용 값입니다. 정제 기준이 다르면 값이 달라지는 것이 정상입니다.</p>
+    </section>
+
+    <div class="pager" id="pager"></div>
+  </div>
+</main>
+
+<footer id="site-footer"></footer>
+<div id="toast">복사되었습니다 ✓</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+<script>initSessionPage(4);</script>
+
+</body>
+</html>

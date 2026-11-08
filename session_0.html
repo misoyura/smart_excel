@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>오프닝 · 이 데이터, 믿어도 될까요? · ChatGPT와 함께하는 스마트 엑셀</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="page-session">
+
+<div class="statusbar"></div>
+
+<header class="header">
+  <div class="wrap">
+    <span class="logo"></span>
+    <p class="eyebrow"></p>
+    <h1>이 데이터, 믿어도 될까요?</h1>
+    <p class="subtitle">오늘의 흐름 · 역할 분담 · 함수 지도 · 실습 파일 살펴보기</p>
+    <div class="meta-chips">
+      <span class="chip time">⏱ 전체 150분</span>
+      <span class="chip out">🎁 결과물 4가지</span>
+    </div>
+    <span class="guide">💡 실습 프롬프트는 복사 버튼으로 붙여넣으세요</span>
+  </div>
+</header>
+
+<nav class="nav" id="site-nav"></nav>
+
+<main>
+  <div class="wrap">
+
+    <section class="card" id="hook">
+      <h2><span class="num">00</span>이 데이터, 믿어도 될까요?</h2>
+      <p class="lead">실습 파일 「02_매출원본」에 실제로 들어 있는 데이터입니다.</p>
+
+      <h3>질문 ① 세 값은 같은 지점일까요?</h3>
+      <div class="tbl-wrap"><table class="table">
+        <thead><tr><th>행</th><th>지점명</th></tr></thead>
+        <tbody>
+          <tr><td>3행</td><td>성남점</td></tr>
+          <tr><td>12행</td><td>성남 점</td></tr>
+          <tr><td>28행</td><td>성남지점</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>질문 ② 이 매출액은 맞을까요?</h3>
+      <div class="tbl-wrap"><table class="table">
+        <thead><tr><th>행</th><th class="num">수량</th><th class="num">판매단가</th><th class="num">매출액</th></tr></thead>
+        <tbody>
+          <tr><td>41행</td><td class="num">3</td><td class="num">4,500</td><td class="num">14,000</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="box warn">
+        <span class="box-title">⚠️ 사람 눈에는 같아 보여도</span>
+        Excel은 전혀 다르게 계산합니다.
+      </div>
+    </section>
+
+    <section class="card" id="flow">
+      <h2><span class="num">01</span>오늘의 흐름과 최종 결과물</h2>
+      <p class="lead">문제를 발견하고, AI에게 묻고, Excel에서 직접 실행해 결과를 검증합니다.</p>
+
+      <div class="flow">
+        <div class="st">문제 발견</div><span class="ar">→</span>
+        <div class="st">AI에게 질문</div><span class="ar">→</span>
+        <div class="st">Excel에서 실행</div><span class="ar">→</span>
+        <div class="st">결과 검증</div><span class="ar">→</span>
+        <div class="st">분석</div><span class="ar">→</span>
+        <div class="st">보고서</div>
+      </div>
+
+      <h3>150분 뒤 여러분 손에 남는 4가지</h3>
+      <div class="cols">
+        <div class="mini xl"><span class="no">1</span><h4>정제 데이터</h4><p><span class="sheetref">05_정제데이터</span></p></div>
+        <div class="mini xl"><span class="no">2</span><h4>피벗 분석</h4><p><span class="sheetref">06_피벗분석</span></p></div>
+        <div class="mini xl"><span class="no">3</span><h4>차트</h4><p><span class="sheetref">07_대시보드</span></p></div>
+        <div class="mini xl"><span class="no">4</span><h4>1페이지 보고서</h4><p><span class="sheetref">08_AI보고서</span></p></div>
+      </div>
+
+      <h3>오늘의 시간표</h3>
+      <div class="tbl-wrap"><table class="table">
+        <thead><tr><th>파트</th><th>주제</th><th>시간</th></tr></thead>
+        <tbody>
+          <tr><td><strong>PART 1</strong></td><td><a href="session_1.html">AI로 데이터 문제 진단</a></td><td>20분</td></tr>
+          <tr><td><strong>PART 2</strong></td><td><a href="session_2.html">AI 수식 생성·검증</a></td><td>40분</td></tr>
+          <tr><td>BREAK</td><td>휴식 — 다음 시간: 찾은 문제를 실제로 고칩니다</td><td>10분</td></tr>
+          <tr><td><strong>PART 3</strong></td><td><a href="session_3.html">데이터 정제 및 구조 표준화</a></td><td>30분</td></tr>
+          <tr><td><strong>PART 4</strong></td><td><a href="session_4.html">매출 분석 &amp; 피벗테이블</a></td><td>20분</td></tr>
+          <tr><td><strong>PART 5</strong></td><td><a href="session_5.html">시각화 &amp; 요약 보고서</a></td><td>15분</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section class="card" id="roles">
+      <h2><span class="num">02</span>역할을 나누면 헷갈리지 않습니다</h2>
+      <p class="lead">실습 슬라이드 오른쪽 위의 배지를 보면 지금 누가 무엇을 하는지 알 수 있습니다.</p>
+
+      <div class="cols">
+        <div class="mini ai"><h4><span class="role ai">AI</span></h4>
+          <p>후보를 찾고<br>방법·수식을 제안하고<br>초안을 쓴다</p></div>
+        <div class="mini stu"><h4><span class="role stu">학생</span></h4>
+          <p>선택하고, 적용하고<br>검증하고<br>최종 판단한다</p></div>
+        <div class="mini xl"><h4><span class="role xl">Excel</span></h4>
+          <p>실제로 계산한다<br><b>(모든 숫자의 근거)</b></p></div>
+        <div class="mini ins"><h4><span class="role ins">강사</span></h4>
+          <p>기준을 제시하고<br>막힌 곳을 푼다</p></div>
+      </div>
+
+      <div class="principle"><em>AI가 알려준다</em> → <em class="b">내가 실행한다</em> → <em class="g">내가 검증한다</em></div>
+    </section>
+
+    <section class="card" id="map">
+      <h2><span class="num">03</span>오늘 만날 함수 지도</h2>
+      <p class="lead">외우지 않아도 됩니다 — 수식은 AI가 알려주고, 우리는 "이 함수가 무슨 일을 하는지"만 압니다.</p>
+
+      <div class="cols">
+        <div class="mini"><span class="no">1</span><h4>판정하기</h4><p>맞는지 틀린지 가린다</p>
+          <div class="fn"><code>IF</code><code>COUNT</code><code>ISNUMBER</code><code>OR · NOT</code></div>
+          <p class="muted">매출 검증 · 조건부 서식</p></div>
+        <div class="mini"><span class="no">2</span><h4>찾아오기</h4><p>기준표에서 정답을 가져온다</p>
+          <div class="fn"><code>XLOOKUP</code><code>COUNTIF</code></div>
+          <p class="muted">상품분류 · 지점명 · 중복</p></div>
+        <div class="mini"><span class="no">3</span><h4>정리하기</h4><p>지저분한 글자를 고친다</p>
+          <div class="fn"><code>SUBSTITUTE</code><code>TRIM</code><code>TEXTJOIN</code><code>DATEVALUE · IFERROR</code></div>
+          <p class="muted">공백 제거 · 날짜 변환</p></div>
+        <div class="mini"><span class="no">4</span><h4>합계 내기</h4><p>조건 맞는 것만 더한다</p>
+          <div class="fn"><code>SUMIFS</code><code>DATE</code></div>
+          <p class="muted">3월 신구점 매출</p></div>
+      </div>
+
+      <div class="box note">
+        <span class="box-title">📌 주인공은 4개</span>
+        <b>IF · XLOOKUP · COUNTIF · SUMIFS</b> — 나머지는 이 4개를 돕는 조연입니다.
+      </div>
+      <p class="muted">함수 14개를 한 장으로 정리한 표는 <a href="session_2.html#cards">PART 2의 함수 카드</a>에서 볼 수 있습니다.</p>
+    </section>
+
+    <section class="card" id="file">
+      <h2><span class="num">04</span>실습 파일 살펴보기</h2>
+      <p class="lead"><b>AI_스마트엑셀_학생용_실습데이터.xlsx</b> &nbsp;·&nbsp; <a href="index.html#downloads">⬇ 파일 받으러 가기</a></p>
+
+      <div class="tbl-wrap"><table class="table">
+        <thead><tr><th>시트</th><th>용도</th><th>사용 시점</th></tr></thead>
+        <tbody>
+          <tr><td><strong>01_실습안내</strong></td><td>미션 안내</td><td>시작</td></tr>
+          <tr><td><strong>02_매출원본</strong></td><td>원본 데이터 100행</td><td>진단 (수정 금지)</td></tr>
+          <tr><td><strong>03_상품Master</strong></td><td>상품 기준정보 10개</td><td>조회</td></tr>
+          <tr><td><strong>04_지점Master</strong></td><td>지점 기준정보 3개</td><td>조회</td></tr>
+          <tr><td><strong>05_정제데이터</strong></td><td>작업·정제 공간</td><td>PART 02~03</td></tr>
+          <tr><td><strong>06_피벗분석</strong></td><td>피벗테이블</td><td>PART 04</td></tr>
+          <tr><td><strong>07_대시보드</strong></td><td>차트</td><td>PART 05</td></tr>
+          <tr><td><strong>08_AI보고서</strong></td><td>요약 보고서</td><td>PART 05</td></tr>
+          <tr><td><strong>09_함수테스트</strong></td><td>수식 연습</td><td>PART 01~02</td></tr>
+          <tr><td><strong>10_확인필요</strong></td><td>분석 제외 행 기록</td><td>PART 03 (강사 시연)</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="box warn">
+        <span class="box-title">⚠️ 주의</span>
+        <b>02_매출원본은 절대 수정하지 않습니다</b> → 05에 복사해서 작업합니다.
+      </div>
+
+      <h3>시작 전 확인</h3>
+      <ul class="check">
+        <li>실습 파일 열기</li>
+        <li>ChatGPT 로그인</li>
+        <li>파일 업로드 버튼 확인</li>
+      </ul>
+
+      <div class="box tip">
+        <span class="box-title">🔒 개인정보 주의</span>
+        회사 데이터를 AI에 올릴 때는 이름 등 개인정보를 지우고, 회사 규정을 먼저 확인합니다.
+      </div>
+    </section>
+
+    <div class="pager" id="pager"></div>
+  </div>
+</main>
+
+<footer id="site-footer"></footer>
+<div id="toast">복사되었습니다 ✓</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+<script>initSessionPage(0);</script>
+
+</body>
+</html>

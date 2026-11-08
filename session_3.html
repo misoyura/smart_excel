@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PART 3 · 데이터 정제 및 구조 표준화 · ChatGPT와 함께하는 스마트 엑셀</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="page-session">
+
+<div class="statusbar"></div>
+
+<header class="header">
+  <div class="wrap">
+    <span class="logo"></span>
+    <p class="eyebrow"></p>
+    <h1>데이터 정제 및 구조 표준화</h1>
+    <p class="subtitle">미션 3 │ 분석하기 전에 데이터를 정리하자</p>
+    <div class="meta-chips">
+      <span class="chip time">⏱ 30분</span>
+      <span class="chip">원칙: 원본 보존 · 기준 기록</span>
+      <span class="chip out">결과: 05_정제데이터 완성</span>
+    </div>
+    <span class="guide">💡 수식과 프롬프트는 복사 버튼으로 붙여넣으세요</span>
+  </div>
+</header>
+
+<nav class="nav" id="site-nav"></nav>
+
+<main>
+  <div class="wrap">
+
+    <section class="card" id="intro">
+      <h2><span class="num">00</span>미션 3 개요</h2>
+      <div class="cols">
+        <div class="mini"><h4>원칙</h4><p>원본 보존 · 기준 기록</p></div>
+        <div class="mini"><h4>결과</h4><p>05_정제데이터 완성</p></div>
+        <div class="mini"><h4>시간</h4><p>30분</p></div>
+      </div>
+    </section>
+
+    <section class="card" id="why">
+      <h2><span class="num">01</span>왜 정제가 먼저일까?</h2>
+      <p class="lead">[09-③] 테스트 결과 다시 보기</p>
+      <div class="tbl-wrap"><table class="table">
+        <thead><tr><th>문제</th><th class="num">SUMIFS</th><th class="num">실제</th></tr></thead>
+        <tbody>
+          <tr><td>3월 신구점</td><td class="num">14,000</td><td class="num">21,000</td></tr>
+          <tr><td>4월 성남점</td><td class="num">9,000</td><td class="num">9,000</td></tr>
+          <tr><td>5월 용인점</td><td class="num">12,000</td><td class="num">17,000</td></tr>
+          <tr><td>신구점 전체</td><td class="num">14,000</td><td class="num">29,000</td></tr>
+        </tbody>
+      </table></div>
+      <div class="big-answer">정제가 끝나면 숫자가 바뀝니다 · 05 시트 W2(3월 신구점 판매) 130,600 → 140,600</div>
+      <p>PART 3이 끝나면 W2가 저절로 바뀌는 것을 확인합니다.</p>
+      <div class="box note">표기 통일 · 숫자 변환 · 불필요한 행 제거가 끝나야 분석 결과를 믿을 수 있습니다.</div>
+    </section>
+
+    <section class="card" id="ask">
+      <h2><span class="num">02</span>AI에게 정제 순서와 기준 묻기</h2>
+      <p class="lead"><span class="chip time">실습</span></p>
+      <div class="cols">
+        <div class="mini ai"><h4><span class="role ai">AI</span></h4><p>순서와 기준을 제안한다</p></div>
+        <div class="mini stu"><h4><span class="role stu">학생</span></h4><p>무엇을 채택할지 결정한다</p></div>
+      </div>
+
+      <div data-prompt="p09"></div>
+
+      <div class="box note"><b>AI의 제안 = 선택지.</b> 최종 기준은 내가 정합니다.</div>
+    </section>
+
+    <section class="card" id="criteria">
+      <h2><span class="num">03</span>정제 기준 결정표</h2>
+      <p class="lead">AI의 제안을 참고해 '채택' 칸을 채우며 기준을 정하고 기록합니다.</p>
+      <div class="tbl-wrap"><table class="table">
+        <thead><tr><th>문제</th><th>권장 기준</th><th>채택</th></tr></thead>
+        <tbody>
+          <tr><td><strong>소계/메모 행</strong></td><td>삭제</td><td class="blank"></td></tr>
+          <tr><td><strong>완전 중복</strong></td><td>1행만 남김</td><td></td></tr>
+          <tr><td><strong>지점명 표기</strong></td><td>지점코드 → 04_지점Master</td><td></td></tr>
+          <tr><td><strong>상품코드 P013·빈칸</strong></td><td>상품명으로 역조회해 복구</td><td></td></tr>
+          <tr><td><strong>상품명 표기·빈칸</strong></td><td>상품코드 → 03_상품Master</td><td></td></tr>
+          <tr><td><strong>텍스트 숫자·날짜</strong></td><td>숫자·날짜로 변환</td><td></td></tr>
+          <tr><td><strong>판매단가 빈칸</strong></td><td>Master 정상판매가</td><td></td></tr>
+          <tr><td><strong>매출액</strong></td><td>수량 × 판매단가로 재계산</td><td></td></tr>
+          <tr><td><strong>수량·날짜·상태 빈칸</strong></td><td>"확인필요" 표시 후 분석 제외</td><td></td></tr>
+          <tr><td><strong>취소 건</strong></td><td>삭제하지 않고 피벗에서 제외</td><td></td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>토론해 봅시다</h3>
+      <ol class="steps">
+        <li><b>P013 행은 코드와 상품명 중 무엇을 믿을까?</b></li>
+        <li><b>매출액 불일치는 수량이 틀린 걸까, 매출액이 틀린 걸까?</b></li>
+      </ol>
+      <div class="box tip">
+        <span class="box-title">AI마다 순서 제안이 다릅니다</span>
+        ChatGPT는 7단계, 다른 AI는 6단계로 제안 → 그래서 기준은 내가 정하고 기록합니다.<br>
+        <b>정답은 하나가 아닙니다. 기준을 정하고 기록하는 것이 핵심!</b>
+      </div>
+    </section>
+
+    <section class="card" id="clean1">
+      <h2><span class="num">04</span>정제 ①: 불필요한 행 → 중복 제거</h2>
+      <p class="lead"><span class="chip time">실습</span> <span class="sheetref">05 시트 · 행 삭제 → 중복 제거</span></p>
+      <div class="box warn">순서가 중요합니다 — <b>소계·메모 행을 먼저 지우고</b> 중복을 제거합니다.</div>
+
+      <h3>1. 불필요한 행 삭제</h3>
+      <ol class="steps">
+        <li><b>L열 비고 열 필터 → "분석 제외"</b></li>
+        <li><b>보이는 3행(33·66·93) 선택 → 행 삭제</b></li>
+        <li><b>필터 해제</b></li>
+      </ol>
+      <div class="box ok">결과: <b>3행 삭제</b></div>
+
+      <h3>2. 중복 제거</h3>
+      <ol class="steps">
+        <li><b>데이터 안 "셀 하나만" 클릭</b></li>
+        <li><b>데이터 탭 → 중복된 항목 제거</b><span>'머리글 표시' 체크</span></li>
+        <li><b>A~L열만 체크 (도우미 열 제외)</b></li>
+        <li><b>확인 메시지 확인</b></li>
+      </ol>
+      <div class="box ok">결과: <b>2개 제거</b></div>
+      <div class="kpi"><div><b>112,600원</b><span>중복 제거 후 W2 (3월 신구점 판매)</span></div></div>
+      <div class="box warn"><span class="box-title">⚠️ 주의</span>도우미 열(M~Q)까지 체크하면 중복 판정이 달라질 수 있습니다.</div>
+    </section>
+
+    <section class="card" id="clean2">
+      <h2><span class="num">05</span>정제 ②: 숫자 · 날짜 형식 통일</h2>
+      <p class="lead"><span class="chip time">실습</span> <span class="sheetref">05 시트 · Q열 → A열에 값 붙여넣기</span></p>
+
+      <h3>텍스트 숫자</h3>
+      <ol class="steps">
+        <li><b>N열 필터 → "값확인"</b></li>
+        <li><b>셀 왼쪽 위 초록 삼각형 확인</b></li>
+        <li><b>경고 아이콘(⚠) 클릭 → 숫자로 변환</b></li>
+        <li><b>필터 해제</b></li>
+      </ol>
+
+      <h3>텍스트 날짜</h3>
+      <p>05 시트 <b>Q2</b>에 입력 → <b>Q96</b>까지 채우기</p>
+      <div class="prompt formula">
+        <div class="prompt-head"><span class="label">수식 · Q2 날짜변환 <span class="lv">IFERROR · DATEVALUE · SUBSTITUTE</span></span><button class="copy-btn" onclick="copyPrompt(this)">복사</button></div>
+        <pre>=IFERROR(IF(ISNUMBER(A2),A2,DATEVALUE(SUBSTITUTE(A2,".","-"))),"확인필요")</pre>
+        <div class="ptip">"2026.05.03"의 점(.)을 하이픈(-)으로 바꾼 뒤 날짜로 변환합니다.</div>
+      </div>
+      <div class="box note">Excel은 슬래시(/)와 하이픈(-)은 날짜로 알아보는데, <b>점(.)은 날짜로 인식하지 않습니다.</b></div>
+      <ol class="steps">
+        <li><b>결과를 값으로 붙여넣기</b><span><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>V</kbd> → 값</span></li>
+        <li><b>A열 덮어쓰기</b></li>
+        <li><b>표시 형식 "날짜"로 지정</b></li>
+      </ol>
+      <div class="kpi"><div><b>136,100원</b><span>숫자·날짜 변환 후 W2</span></div></div>
+    </section>
+
+    <section class="card" id="clean3">
+      <h2><span class="num">06</span>정제 ③: 명칭 · 코드 표준화 + 매출액 재계산</h2>
+      <p class="lead"><span class="chip time">실습</span> <span class="sheetref">05 시트 · R~U → C·D·E·H열 교체</span></p>
+
+      <div class="box note">
+        <b>원칙:</b> 사람이 입력한 이름보다 <b>코드</b>를 믿는다 → 명칭은 코드로 Master에서 가져옵니다.<br>
+        빈 열에서 수식으로 만들기 → 값으로 붙여넣기 → 원래 열 교체
+      </div>
+
+      <h3>순서</h3>
+      <ol class="steps">
+        <li><b>지점명 (R열 → C열)</b></li>
+        <li><b>상품코드 (S열 → D열)</b></li>
+        <li><b>상품명 (T열 → E열)</b><span>반드시 ② 다음에</span></li>
+        <li><b>판매단가 빈칸 채우기</b></li>
+        <li><b>매출액 재계산 (U열 → H열)</b></li>
+        <li><b>정리</b></li>
+      </ol>
+
+      <h3>1. 지점명 (R열)</h3>
+      <div class="prompt formula">
+        <div class="prompt-head"><span class="label">수식 · R2 지점명 <span class="lv">XLOOKUP</span></span><button class="copy-btn" onclick="copyPrompt(this)">복사</button></div>
+        <pre>=XLOOKUP(B2,'04_지점Master'!$A$2:$A$4,'04_지점Master'!$B$2:$B$4,"확인필요")</pre>
+        <div class="ptip">"이 행의 지점코드(B2)를 Master 코드 목록에서 찾아, 같은 줄의 표준 지점명을 가져와라"</div>
+      </div>
+      <div class="kpi"><div><b>140,100원</b><span>지점명 정리 후 W2</span></div></div>
+
+      <h3>2. 상품코드 (S열)</h3>
+      <div class="prompt formula">
+        <div class="prompt-head"><span class="label">수식 · S2 상품코드 <span class="lv">IF · COUNTIF · XLOOKUP · SUBSTITUTE</span></span><button class="copy-btn" onclick="copyPrompt(this)">복사</button></div>
+        <pre>=IF(COUNTIF('03_상품Master'!$A$2:$A$11,D2)&gt;0,D2,
+XLOOKUP(SUBSTITUTE(E2," ",""),'03_상품Master'!$B$2:$B$11,'03_상품Master'!$A$2:$A$11,"확인필요"))</pre>
+        <div class="ptip">"이 코드가 Master에 있나?(COUNTIF&gt;0) 있으면 그대로, 없으면(P013/빈칸) 상품명에서 공백을 빼고, 그 이름으로 코드를 거꾸로 찾아라"</div>
+      </div>
+
+      <h3>3. 상품명 (T열) — 반드시 ② 다음에</h3>
+      <div class="prompt formula">
+        <div class="prompt-head"><span class="label">수식 · T2 상품명 <span class="lv">XLOOKUP</span></span><button class="copy-btn" onclick="copyPrompt(this)">복사</button></div>
+        <pre>=XLOOKUP(D2,'03_상품Master'!$A$2:$A$11,'03_상품Master'!$B$2:$B$11,"확인필요")</pre>
+      </div>
+
+      <h3>4. 판매단가 빈칸 채우기</h3>
+      <p>G열 필터 → <b>"(필드 값 없음)"</b> → 1행(05 91행, 바닐라라떼 P003) → <b>4500 직접 입력</b> (Master 정상판매가) → 필터 해제</p>
+
+      <h3>5. 매출액 재계산 (U열 → H열)</h3>
+      <div class="prompt formula">
+        <div class="prompt-head"><span class="label">수식 · U2 매출액 재계산 <span class="lv">IF + COUNT</span></span><button class="copy-btn" onclick="copyPrompt(this)">복사</button></div>
+        <pre>=IF(COUNT(F2:G2)&lt;2,H2,F2*G2)</pre>
+        <div class="ptip">수량이나 단가가 빈칸인 행은 원래 매출액을 그대로 두고, 나머지만 재계산합니다.</div>
+      </div>
+      <div class="box tip">"모르는 값은 0으로 만들지 말고, 원래 값을 두고 표시만 한다"</div>
+      <div class="kpi"><div><b>140,600원</b><span>매출액 재계산 후 W2</span></div></div>
+
+      <h3>6. 정리</h3>
+      <p>R~U열 선택 → <kbd>Delete</kbd> 키(내용만 지우기). <b>열 삭제는 하지 않음</b> (W2 위치 유지)</p>
+
+      <div class="box ok">
+        <span class="box-title">✅ 검증</span>
+        W2가 <b>140,600원</b>으로 바뀌었는지 확인 → 정제 전 130,600원, 정제 후 140,600원
+      </div>
+      <div class="flow">
+        <div class="st">130,600<small>정제 전</small></div><span class="ar">→</span>
+        <div class="st">112,600<small>중복 제거 후</small></div><span class="ar">→</span>
+        <div class="st">136,100<small>숫자·날짜 변환 후</small></div><span class="ar">→</span>
+        <div class="st">140,100<small>지점명 정리 후</small></div><span class="ar">→</span>
+        <div class="st">140,600<small>매출액 재계산 후</small></div>
+      </div>
+      <p class="muted center">단계마다 W2 값을 확인하면 어느 단계에서 어긋났는지 바로 찾을 수 있습니다.</p>
+    </section>
+
+    <section class="card" id="cf">
+      <h2><span class="num">07</span>조건부 서식으로 남은 문제 강조</h2>
+      <p class="lead"><span class="chip time">실습</span> <span class="sheetref">05 시트 · A2:L96 조건부 서식</span></p>
+
+      <h3>이렇게 설정하세요</h3>
+      <ol class="steps">
+        <li><b>A2:L96 범위 선택</b></li>
+        <li><b>홈 → 조건부 서식 → 새 규칙</b></li>
+        <li><b>"수식을 사용하여 서식을 지정할 셀 결정"</b></li>
+        <li><b>수식 입력 → 서식 → 연한 빨강 채우기</b></li>
+      </ol>
+      <div class="prompt formula">
+        <div class="prompt-head"><span class="label">조건부 서식 수식 <span class="lv">OR · NOT · ISNUMBER</span></span><button class="copy-btn" onclick="copyPrompt(this)">복사</button></div>
+        <pre>=OR($N2&lt;&gt;"정상",NOT(ISNUMBER($A2)),$K2="")</pre>
+        <div class="ptip">N열이 정상이 아니거나, 또는 날짜가 숫자가 아니거나, 또는 주문상태가 빈칸이면 칠합니다. 열 문자 앞에만 $ → 행 전체가 칠해집니다.</div>
+      </div>
+
+      <h3>결과 예시 — 빨간 행 3개</h3>
+      <div class="tbl-wrap"><table class="table">
+        <thead><tr><th>원본 행</th><th>05 행</th><th>남은 문제</th></tr></thead>
+        <tbody>
+          <tr><td>8행</td><td>8행</td><td>수량 빈칸</td></tr>
+          <tr><td>47행</td><td>45행</td><td>주문일자 빈칸</td></tr>
+          <tr><td>88행</td><td>84행</td><td>주문상태 빈칸</td></tr>
+        </tbody>
+      </table></div>
+      <div class="box note">100행을 눈으로 보지 않고 <b>Excel이 문제 행을 칠하게</b> 합니다.</div>
+    </section>
+
+    <section class="card" id="todo">
+      <h2><span class="num">08</span>빼기 전에 기록하기: 확인필요 목록</h2>
+      <p class="lead"><span class="role ins">강사 시연 1분</span> <span class="sheetref">05 시트 → 10_확인필요 시트</span></p>
+
+      <h3>시연 순서</h3>
+      <ol class="steps">
+        <li><b>05 시트 → 색 기준 필터 → 연한 빨강</b><span>3행만 보임</span></li>
+        <li><b>A~L 범위만 선택 → <kbd>Ctrl</kbd>+<kbd>C</kbd></b></li>
+        <li><b>「10_확인필요」 A5 클릭 → <kbd>Ctrl</kbd>+<kbd>V</kbd></b></li>
+        <li><b>M열에 제외 사유 적기</b><span>→ 05로 돌아와 PART 4에서 3행 삭제</span></li>
+      </ol>
+      <div class="box warn"><span class="box-title">⚠️ 주의</span>M~Q 도우미 열까지 복사하지 않기 — <b>A~L만</b></div>
+
+      <h3>「10_확인필요」 시트 결과</h3>
+      <div class="tbl-wrap"><table class="table">
+        <thead><tr><th>05 행</th><th>원본 행</th><th>지점</th><th>상품</th><th>빠진 값</th><th>제외 사유</th></tr></thead>
+        <tbody>
+          <tr><td>8행</td><td>8행</td><td>성남점</td><td>아메리카노</td><td>수량</td><td>수량 빈칸</td></tr>
+          <tr><td>45행</td><td>47행</td><td>신구점</td><td>아메리카노</td><td>주문일자</td><td>주문일자 빈칸</td></tr>
+          <tr><td>84행</td><td>88행</td><td>성남점</td><td>바닐라라떼</td><td>주문상태</td><td>주문상태 빈칸</td></tr>
+        </tbody>
+      </table></div>
+      <p>원본은 「02_매출원본」에 그대로 있습니다 → 이 목록을 담당자에게 보내 확인받고, 답이 오면 고쳐서 다시 분석에 넣습니다.</p>
+      <div class="box ok"><b>분석에서 뺀다 ≠ 버린다</b> — 빼는 것보다 기록하는 것이 더 중요합니다.</div>
+    </section>
+
+    <section class="card" id="result">
+      <h2><span class="num">09</span>정제 전 → 정제 후 · 미션 3 완료</h2>
+      <div class="kpi">
+        <div><b>11종 → 3종</b><span>지점명 고유값 (빈칸 제외)</span></div>
+        <div><b>130,600 → 140,600</b><span>3월 신구점 판매 SUMIFS (원)</span></div>
+        <div><b>100 → 92행</b><span>분석 대상 행 (확인필요 3행 제외)</span></div>
+      </div>
+      <h3>미션 3 체크</h3>
+      <ul class="check">
+        <li>원본 보존</li>
+        <li>정제 기준표 작성</li>
+        <li>형식 통일</li>
+        <li>명칭·코드 표준화</li>
+        <li>남은 문제 표시</li>
+      </ul>
+    </section>
+
+    <div class="pager" id="pager"></div>
+  </div>
+</main>
+
+<footer id="site-footer"></footer>
+<div id="toast">복사되었습니다 ✓</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+<script>initSessionPage(3);</script>
+
+</body>
+</html>
