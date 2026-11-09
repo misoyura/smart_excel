@@ -122,35 +122,51 @@
       </ol>
       <div class="box ok">결과: <b>2개 제거</b></div>
       <div class="kpi"><div><b>112,600원</b><span>중복 제거 후 W2 (3월 신구점 판매)</span></div></div>
-      <div class="box warn"><span class="box-title">⚠️ 주의</span>도우미 열(M~Q)까지 체크하면 중복 판정이 달라질 수 있습니다.</div>
+      <div class="box warn"><span class="box-title">⚠️ 주의</span>도우미 열(M~P)까지 체크하면 중복 판정이 달라질 수 있습니다.</div>
     </section>
 
     <section class="card" id="clean2">
       <h2><span class="num">05</span>정제 ②: 숫자 · 날짜 형식 통일</h2>
-      <p class="lead"><span class="chip time">실습</span> <span class="sheetref">05 시트 · Q열 → A열에 값 붙여넣기</span></p>
+      <p class="lead"><span class="chip time">실습</span> <span class="sheetref">05 시트 · N열 필터 → 숫자로 변환 / A열 텍스트 나누기</span></p>
+      <div class="flow">
+        <div class="st">① 텍스트 숫자</div><span class="ar">→</span>
+        <div class="st">② 텍스트 날짜</div>
+      </div>
 
-      <h3>텍스트 숫자</h3>
+      <h3 id="clean2-1">②-1 텍스트 숫자 → 진짜 숫자</h3>
       <ol class="steps">
         <li><b>N열 필터 → "값확인"</b></li>
         <li><b>셀 왼쪽 위 초록 삼각형 확인</b></li>
-        <li><b>경고 아이콘(⚠) 클릭 → 숫자로 변환</b></li>
+        <li><b>초록 삼각형 셀 선택 → 경고 아이콘(⚠) 클릭 → "숫자로 변환"</b></li>
         <li><b>필터 해제</b></li>
       </ol>
+      <div class="box note"><span class="box-title">예시</span>"13500" <span class="muted">(왼쪽 정렬된 글자)</span> &nbsp;→&nbsp; 13500 <span class="muted">(오른쪽 정렬된 숫자)</span></div>
+      <div class="box tip"><span class="box-title">쉽게 말하면</span>숫자처럼 보이지만 글자로 들어간 칸을 Excel이 계산할 수 있는 <b>진짜 숫자</b>로 바꿉니다.</div>
+      <div class="box ok"><span class="box-title">✅ 확인</span>4칸 변환 (수량 2 · 단가 1 · 매출액 1) → 필터 해제 → W2 = <b>126,100원</b></div>
+      <div class="kpi"><div><b>126,100원</b><span>숫자로 변경 후 W2</span></div></div>
 
-      <h3>텍스트 날짜</h3>
-      <p>05 시트 <b>Q2</b>에 입력 → <b>Q96</b>까지 채우기</p>
-      <div class="prompt formula">
-        <div class="prompt-head"><span class="label">수식 · Q2 날짜변환 <span class="lv">IFERROR · DATEVALUE · SUBSTITUTE</span></span><button class="copy-btn" onclick="copyPrompt(this)">복사</button></div>
-        <pre>=IFERROR(IF(ISNUMBER(A2),A2,DATEVALUE(SUBSTITUTE(A2,".","-"))),"확인필요")</pre>
-        <div class="ptip">"2026.05.03"의 점(.)을 하이픈(-)으로 바꾼 뒤 날짜로 변환합니다.</div>
-      </div>
-      <div class="box note">Excel은 슬래시(/)와 하이픈(-)은 날짜로 알아보는데, <b>점(.)은 날짜로 인식하지 않습니다.</b></div>
+      <h3 id="clean2-2">②-2 텍스트 날짜 → 진짜 날짜</h3>
+      <p class="muted">05 시트 · A열 텍스트 나누기 (수식이 필요 없습니다)</p>
       <ol class="steps">
-        <li><b>결과를 값으로 붙여넣기</b><span><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>V</kbd> → 값</span></li>
-        <li><b>A열 덮어쓰기</b></li>
-        <li><b>표시 형식 "날짜"로 지정</b></li>
+        <li><b>A2 클릭 → <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>↓</kbd></b></li>
+        <li><b>데이터 → 텍스트 나누기</b></li>
+        <li><b>[다음] → [다음]</b></li>
+        <li><b>"날짜(YMD)" → [마침]</b></li>
       </ol>
-      <div class="kpi"><div><b>136,100원</b><span>숫자·날짜 변환 후 W2</span></div></div>
+      <div class="box note"><span class="box-title">예시</span>2026.05.03 · 2026/03/18 <span class="muted">(글자)</span> &nbsp;→&nbsp; 2026-05-03 <span class="muted">(진짜 날짜)</span></div>
+      <div class="box tip"><span class="box-title">쉽게 말하면</span>날짜처럼 생긴 글자에 <b>"이건 날짜야" 도장</b>을 찍어 줍니다. 수식이 필요 없습니다.</div>
+
+      <p><b>확인:</b> 빈 셀에 아래 수식을 입력 → <b>94</b>면 성공</p>
+      <div class="prompt formula">
+        <div class="prompt-head"><span class="label">확인 수식 · 빈 셀 <span class="lv">COUNT</span></span><button class="copy-btn" onclick="copyPrompt(this)">복사</button></div>
+        <pre>=COUNT(A2:A96)</pre>
+      </div>
+      <ul class="check">
+        <li>홈 → 표시 형식 "간단한 날짜"</li>
+        <li>W2 = 136,100원</li>
+      </ul>
+      <div class="box warn"><span class="box-title">⚠️ 주의</span>94보다 작으면 → 남은 날짜만 선택 → <kbd>Ctrl</kbd>+<kbd>H</kbd>로 "." 을 "-" 로 바꾼 뒤 다시 텍스트 나누기</div>
+      <div class="kpi"><div><b>136,100원</b><span>숫자 · 날짜 변환 후 W2</span></div></div>
     </section>
 
     <section class="card" id="clean3">
@@ -158,8 +174,7 @@
       <p class="lead"><span class="chip time">실습</span> <span class="sheetref">05 시트 · R~U → C·D·E·H열 교체</span></p>
 
       <div class="box note">
-        <b>원칙:</b> 사람이 입력한 이름보다 <b>코드</b>를 믿는다 → 명칭은 코드로 Master에서 가져옵니다.<br>
-        빈 열에서 수식으로 만들기 → 값으로 붙여넣기 → 원래 열 교체
+        <b>원칙:</b> 빈 열(R~U)에서 수식으로 만들기 → 값으로 붙여넣기 → 원래 열 교체. 사람이 쓴 이름보다 <b>코드</b>를 믿습니다.
       </div>
 
       <h3>순서</h3>
@@ -172,50 +187,88 @@
         <li><b>정리</b></li>
       </ol>
 
-      <h3>1. 지점명 (R열)</h3>
+      <h3 id="clean3-1">③-1 지점명 바로잡기 <span class="muted">(R열 → C열)</span></h3>
+      <ol class="steps">
+        <li><b>R2에 수식 입력</b></li>
+        <li><b>더블클릭으로 R96까지 채우기</b></li>
+        <li><b>R열 복사 → C2에 값 붙여넣기</b></li>
+      </ol>
       <div class="prompt formula">
         <div class="prompt-head"><span class="label">수식 · R2 지점명 <span class="lv">XLOOKUP</span></span><button class="copy-btn" onclick="copyPrompt(this)">복사</button></div>
         <pre>=XLOOKUP(B2,'04_지점Master'!$A$2:$A$4,'04_지점Master'!$B$2:$B$4,"확인필요")</pre>
-        <div class="ptip">"이 행의 지점코드(B2)를 Master 코드 목록에서 찾아, 같은 줄의 표준 지점명을 가져와라"</div>
       </div>
+      <div class="box tip"><span class="box-title">쉽게 말하면</span>이 행의 지점코드(B2)로 지점Master에서 표준 지점명을 찾아 옵니다 — <b>"학번으로 이름 찾기"</b></div>
+      <div class="box ok"><span class="box-title">✅ 확인</span>C열 필터 → 신구점 · 성남점 · 용인점 3개만 남으면 성공 · W2 = <b>140,100원</b></div>
+      <div class="box warn"><span class="box-title">⚠️ 주의</span>수식 속 A열은 '04_지점Master'의 지점코드 열입니다 (05 시트의 주문일자 아님)</div>
       <div class="kpi"><div><b>140,100원</b><span>지점명 정리 후 W2</span></div></div>
 
-      <h3>2. 상품코드 (S열)</h3>
+      <h3 id="clean3-2">③-2 상품코드 되살리기 <span class="muted">(S열 → D열)</span></h3>
+      <ol class="steps">
+        <li><b>S2에 수식 입력</b></li>
+        <li><b>더블클릭으로 S96까지 채우기</b></li>
+        <li><b>S열 복사 → D2에 값 붙여넣기</b></li>
+      </ol>
       <div class="prompt formula">
         <div class="prompt-head"><span class="label">수식 · S2 상품코드 <span class="lv">IF · COUNTIF · XLOOKUP · SUBSTITUTE</span></span><button class="copy-btn" onclick="copyPrompt(this)">복사</button></div>
         <pre>=IF(COUNTIF('03_상품Master'!$A$2:$A$11,D2)&gt;0,D2,
 XLOOKUP(SUBSTITUTE(E2," ",""),'03_상품Master'!$B$2:$B$11,'03_상품Master'!$A$2:$A$11,"확인필요"))</pre>
-        <div class="ptip">"이 코드가 Master에 있나?(COUNTIF&gt;0) 있으면 그대로, 없으면(P013/빈칸) 상품명에서 공백을 빼고, 그 이름으로 코드를 거꾸로 찾아라"</div>
       </div>
+      <div class="box tip"><span class="box-title">쉽게 말하면</span>코드가 Master에 있으면 그대로 / 없으면(P013 · 빈칸) 상품명 공백을 빼고 코드를 거꾸로 찾습니다.</div>
+      <div class="box ok"><span class="box-title">✅ 확인</span>M열(상품분류)의 "확인필요"가 모두 사라지면 성공 (05 시트 49 · 61 · 93행)</div>
 
-      <h3>3. 상품명 (T열) — 반드시 ② 다음에</h3>
+      <h3 id="clean3-3">③-3 상품명 통일하기 <span class="muted">(T열 → E열)</span></h3>
+      <ol class="steps">
+        <li><b>T2에 수식 입력</b></li>
+        <li><b>더블클릭으로 T96까지 채우기</b></li>
+        <li><b>T열 복사 → E2에 값 붙여넣기</b></li>
+      </ol>
       <div class="prompt formula">
         <div class="prompt-head"><span class="label">수식 · T2 상품명 <span class="lv">XLOOKUP</span></span><button class="copy-btn" onclick="copyPrompt(this)">복사</button></div>
         <pre>=XLOOKUP(D2,'03_상품Master'!$A$2:$A$11,'03_상품Master'!$B$2:$B$11,"확인필요")</pre>
       </div>
+      <div class="box tip"><span class="box-title">쉽게 말하면</span>방금 고친 상품코드로 Master에서 정확한 상품명을 가져옵니다.</div>
+      <div class="box ok"><span class="box-title">✅ 확인</span>E열 필터 → "카페 라떼" · "아메리카노 " 같은 띄어쓰기 표기와 빈칸이 사라지면 성공</div>
+      <div class="box warn"><span class="box-title">⚠️ 주의</span>반드시 ② 상품코드 다음에! 먼저 하면 P013 행이 "확인필요"가 되어 되살릴 단서가 사라집니다.</div>
 
-      <h3>4. 판매단가 빈칸 채우기</h3>
-      <p>G열 필터 → <b>"(필드 값 없음)"</b> → 1행(05 91행, 바닐라라떼 P003) → <b>4500 직접 입력</b> (Master 정상판매가) → 필터 해제</p>
+      <h3 id="clean3-4">③-4 판매단가 빈칸 채우기</h3>
+      <ol class="steps">
+        <li><b>G열 필터 ▼ → "(필드 값 없음)"만 선택</b></li>
+        <li><b>4500 입력</b></li>
+        <li><b>필터 해제</b></li>
+      </ol>
+      <div class="box note"><span class="box-title">대상</span>05 시트 91행 · 바닐라라떼(P003) → <b>4,500원</b></div>
+      <div class="box tip"><span class="box-title">쉽게 말하면</span>비어 있는 가격은 기준표(03_상품Master)의 정상판매가로 채웁니다.</div>
+      <div class="box ok"><span class="box-title">✅ 확인</span>G열 필터 목록에 "(필드 값 없음)"이 사라지면 성공</div>
 
-      <h3>5. 매출액 재계산 (U열 → H열)</h3>
+      <h3 id="clean3-5">③-5 매출액 다시 계산하기 <span class="muted">(U열 → H열)</span></h3>
+      <ol class="steps">
+        <li><b>U2에 수식 입력</b></li>
+        <li><b>더블클릭으로 U96까지 채우기</b></li>
+        <li><b>U열 복사 → H2에 값 붙여넣기</b></li>
+      </ol>
       <div class="prompt formula">
         <div class="prompt-head"><span class="label">수식 · U2 매출액 재계산 <span class="lv">IF + COUNT</span></span><button class="copy-btn" onclick="copyPrompt(this)">복사</button></div>
         <pre>=IF(COUNT(F2:G2)&lt;2,H2,F2*G2)</pre>
-        <div class="ptip">수량이나 단가가 빈칸인 행은 원래 매출액을 그대로 두고, 나머지만 재계산합니다.</div>
       </div>
-      <div class="box tip">"모르는 값은 0으로 만들지 말고, 원래 값을 두고 표시만 한다"</div>
+      <div class="box tip"><span class="box-title">쉽게 말하면</span>수량 · 단가가 둘 다 숫자면 다시 곱하고, 하나라도 비어 있으면 원래 매출액을 그대로 둡니다.</div>
+      <div class="box ok"><span class="box-title">✅ 확인</span>W2 = <b>140,600원</b> · N열 "검토필요" 0건</div>
+      <div class="box warn"><span class="box-title">⚠️ 주의</span>U열만 만들면 아무것도 바뀌지 않습니다 → 반드시 H2에 <b>"값으로 붙여넣기"</b>까지!</div>
       <div class="kpi"><div><b>140,600원</b><span>매출액 재계산 후 W2</span></div></div>
 
-      <h3>6. 정리</h3>
-      <p>R~U열 선택 → <kbd>Delete</kbd> 키(내용만 지우기). <b>열 삭제는 하지 않음</b> (W2 위치 유지)</p>
+      <h3 id="clean3-6">③-6 임시 열 정리 + 결과 확인</h3>
+      <ol class="steps">
+        <li><b>R~U열 머리글 선택</b></li>
+        <li><b><kbd>Delete</kbd> 키 (내용만 지우기)</b></li>
+        <li><b>열 삭제는 하지 않기</b></li>
+      </ol>
+      <div class="box tip"><span class="box-title">쉽게 말하면</span>빈 열에서 수식 → 값으로 붙여넣기 → 원래 열 교체. <b>사람이 쓴 이름보다 코드를 믿습니다.</b></div>
+      <div class="box ok"><span class="box-title">✅ 확인</span>W2가 <b>140,600원</b>이면 정제 ③ 완료 · R~U열이 비어 있고 W2는 그대로 · 정제 전 130,600원 → 정제 후 140,600원</div>
+      <div class="box warn"><span class="box-title">⚠️ 주의</span>R~U "열 삭제"를 하면 W열이 왼쪽으로 밀립니다 → <kbd>Delete</kbd> 키로 내용만 지우세요.</div>
 
-      <div class="box ok">
-        <span class="box-title">✅ 검증</span>
-        W2가 <b>140,600원</b>으로 바뀌었는지 확인 → 정제 전 130,600원, 정제 후 140,600원
-      </div>
       <div class="flow">
         <div class="st">130,600<small>정제 전</small></div><span class="ar">→</span>
         <div class="st">112,600<small>중복 제거 후</small></div><span class="ar">→</span>
+        <div class="st">126,100<small>숫자 변경 후</small></div><span class="ar">→</span>
         <div class="st">136,100<small>숫자·날짜 변환 후</small></div><span class="ar">→</span>
         <div class="st">140,100<small>지점명 정리 후</small></div><span class="ar">→</span>
         <div class="st">140,600<small>매출액 재계산 후</small></div>
@@ -263,7 +316,7 @@ XLOOKUP(SUBSTITUTE(E2," ",""),'03_상품Master'!$B$2:$B$11,'03_상품Master'!$A$
         <li><b>「10_확인필요」 A5 클릭 → <kbd>Ctrl</kbd>+<kbd>V</kbd></b></li>
         <li><b>M열에 제외 사유 적기</b><span>→ 05로 돌아와 PART 4에서 3행 삭제</span></li>
       </ol>
-      <div class="box warn"><span class="box-title">⚠️ 주의</span>M~Q 도우미 열까지 복사하지 않기 — <b>A~L만</b></div>
+      <div class="box warn"><span class="box-title">⚠️ 주의</span>M~P 도우미 열까지 복사하지 않기 — <b>A~L만</b></div>
 
       <h3>「10_확인필요」 시트 결과</h3>
       <div class="tbl-wrap"><table class="table">

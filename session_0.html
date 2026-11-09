@@ -15,7 +15,7 @@
     <span class="logo"></span>
     <p class="eyebrow"></p>
     <h1>이 데이터, 믿어도 될까요?</h1>
-    <p class="subtitle">오늘의 흐름 · 역할 분담 · 함수 지도 · 실습 파일 살펴보기</p>
+    <p class="subtitle">오늘의 흐름 · 역할 분담 · 함수 지도 · 함수 쉽게 보기 · 실습 파일 살펴보기</p>
     <div class="meta-chips">
       <span class="chip time">⏱ 전체 150분</span>
       <span class="chip out">🎁 결과물 4가지</span>
@@ -121,7 +121,7 @@
           <div class="fn"><code>XLOOKUP</code><code>COUNTIF</code></div>
           <p class="muted">상품분류 · 지점명 · 중복</p></div>
         <div class="mini"><span class="no">3</span><h4>정리하기</h4><p>지저분한 글자를 고친다</p>
-          <div class="fn"><code>SUBSTITUTE</code><code>TRIM</code><code>TEXTJOIN</code><code>DATEVALUE · IFERROR</code></div>
+          <div class="fn"><code>SUBSTITUTE</code><code>TEXTJOIN</code><code>텍스트 나누기(기능)</code></div>
           <p class="muted">공백 제거 · 날짜 변환</p></div>
         <div class="mini"><span class="no">4</span><h4>합계 내기</h4><p>조건 맞는 것만 더한다</p>
           <div class="fn"><code>SUMIFS</code><code>DATE</code></div>
@@ -132,11 +132,125 @@
         <span class="box-title">📌 주인공은 4개</span>
         <b>IF · XLOOKUP · COUNTIF · SUMIFS</b> — 나머지는 이 4개를 돕는 조연입니다.
       </div>
-      <p class="muted">함수 14개를 한 장으로 정리한 표는 <a href="session_2.html#cards">PART 2의 함수 카드</a>에서 볼 수 있습니다.</p>
+      <p class="muted">함수 11개를 한 장으로 정리한 표는 <a href="session_2.html#cards">PART 2의 함수 카드</a>에서 볼 수 있습니다.</p>
+    </section>
+
+    <section class="card" id="funcs">
+      <h2><span class="num">04</span>함수 쉽게 보기</h2>
+      <p class="lead">오늘의 주인공 함수를 교실 속 예시로 먼저 만나봅니다. 예시 표는 <b>A열 · B열 · C열</b>, 데이터는 <b>2행부터</b> 있다고 생각하세요.</p>
+
+      <h3>① XLOOKUP — 학번으로 이름 찾기</h3>
+      <p>번호(코드)를 알면, 기준표에서 <b>같은 줄의 정보</b>를 찾아 가져옵니다.</p>
+      <div class="tbl-wrap"><table class="table">
+        <thead><tr><th>예시 · 우리 반 명단</th><th>A</th><th>B</th><th>C</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><strong>학번</strong></td><td><strong>이름</strong></td><td><strong>학과</strong></td></tr>
+          <tr><td>2</td><td>2401</td><td>김민지</td><td>경영</td></tr>
+          <tr><td>3</td><td>2402</td><td>이서준</td><td>컴퓨터공학</td></tr>
+          <tr><td>4</td><td>2403</td><td>박서연</td><td>경영</td></tr>
+          <tr><td>5</td><td>2404</td><td>최지훈</td><td>디자인</td></tr>
+          <tr><td>6</td><td>2405</td><td>한지우</td><td>경영</td></tr>
+        </tbody>
+      </table></div>
+      <div class="principle" style="font-size:16px;font-family:Consolas,monospace">=XLOOKUP(2403, A2:A6, B2:B6, "없는 학번")</div>
+      <div class="cols">
+        <div class="mini"><span class="no">1</span><h4>찾을 값</h4><p>2403 — 내가 찾는 학번</p></div>
+        <div class="mini"><span class="no">2</span><h4>찾을 범위</h4><p>학번 목록(A2:A6)에서 찾고</p></div>
+        <div class="mini"><span class="no">3</span><h4>가져올 범위</h4><p>같은 줄의 이름(B2:B6)을 가져옴</p></div>
+        <div class="mini"><span class="no">4</span><h4>못 찾을 때</h4><p>2409처럼 없으면 "없는 학번"</p></div>
+      </div>
+      <div class="box ok"><span class="box-title">결과</span><b>박서연</b> &nbsp;(2409를 찾으면 → "없는 학번")</div>
+      <div class="box tip"><span class="box-title">📌 오늘 수업에서는</span>상품코드로 03_상품Master에서 상품분류를 찾아옵니다.<br><code>=XLOOKUP(D2, 상품코드 목록, 상품분류 목록, "확인필요")</code></div>
+
+      <h3>② IF — 합격일까, 재시험일까?</h3>
+      <p>조건이 맞으면 A, 틀리면 B — <b>갈림길에서 한쪽</b>을 고릅니다.</p>
+      <div class="tbl-wrap"><table class="table">
+        <thead><tr><th>예시 · 80점 이상이면 합격</th><th>이름</th><th class="num">점수</th><th>판정</th></tr></thead>
+        <tbody>
+          <tr><td>2</td><td>김민지</td><td class="num">85</td><td class="good">합격</td></tr>
+          <tr><td>3</td><td>이서준</td><td class="num">92</td><td class="good">합격</td></tr>
+          <tr><td>4</td><td>박서연</td><td class="num">72</td><td class="bad">재시험</td></tr>
+          <tr><td>5</td><td>최지훈</td><td class="num">78</td><td class="bad">재시험</td></tr>
+          <tr><td>6</td><td>한지우</td><td class="num">90</td><td class="good">합격</td></tr>
+        </tbody>
+      </table></div>
+      <div class="principle" style="font-size:16px;font-family:Consolas,monospace">=IF(B2&gt;=80, "합격", "재시험")</div>
+      <div class="cols">
+        <div class="mini"><span class="no">1</span><h4>조건</h4><p>점수가 80 이상인가? (B2&gt;=80)</p></div>
+        <div class="mini"><span class="no">2</span><h4>맞으면</h4><p>"합격"</p></div>
+        <div class="mini"><span class="no">3</span><h4>틀리면</h4><p>"재시험"</p></div>
+      </div>
+      <div class="box ok"><span class="box-title">결과</span>박서연(72점) → <b>재시험</b></div>
+      <div class="box tip"><span class="box-title">📌 오늘 수업에서는</span>수량 × 판매단가가 매출액과 같으면 "정상", 다르면 "검토필요"<br><code>=IF(F2*G2=H2, "정상", "검토필요")</code></div>
+
+      <h3>③ COUNT — 숫자인 칸만 세는 출석 체크</h3>
+      <p>칸 안에 <b>"진짜 숫자"</b>가 몇 개인지 셉니다. 빈칸과 글자는 세지 않습니다.</p>
+      <div class="tbl-wrap"><table class="table">
+        <thead><tr><th>예시 · 과제 점수 제출 확인</th><th>이름</th><th>과제 점수</th><th>셀까?</th></tr></thead>
+        <tbody>
+          <tr><td>2</td><td>김민지</td><td>85</td><td class="good">○</td></tr>
+          <tr><td>3</td><td>이서준</td><td>92</td><td class="good">○</td></tr>
+          <tr><td>4</td><td>박서연</td><td>(빈칸)</td><td class="bad">×</td></tr>
+          <tr><td>5</td><td>최지훈</td><td>"78" <span class="muted">글자</span></td><td class="bad">×</td></tr>
+          <tr><td>6</td><td>한지우</td><td>90</td><td class="good">○</td></tr>
+        </tbody>
+      </table></div>
+      <div class="principle" style="font-size:16px;font-family:Consolas,monospace">=COUNT(B2:B6)</div>
+      <div class="cols">
+        <div class="mini"><span class="no">1</span><h4>범위</h4><p>과제 점수 칸 5개 (B2:B6)</p></div>
+        <div class="mini"><span class="no">2</span><h4>숫자</h4><p>85 · 92 · 90 → 셈</p></div>
+        <div class="mini"><span class="no">3</span><h4>빈칸</h4><p>→ 안 셈</p></div>
+        <div class="mini"><span class="no">4</span><h4>글자 "78"</h4><p>눈에는 숫자여도 글자 → 안 셈</p></div>
+      </div>
+      <div class="box ok"><span class="box-title">결과</span><b>3</b> &nbsp;(5칸 중 진짜 숫자는 3칸)</div>
+      <div class="box tip"><span class="box-title">📌 오늘 수업에서는</span>수량·단가·매출액 3칸이 모두 숫자인지 확인 → 3개가 안 되면 "값확인"<br><code>=IF(COUNT(F2:H2)&lt;3, "값확인", …)</code></div>
+
+      <h3>④ COUNTIF — 나랑 같은 사람이 몇 명?</h3>
+      <p>범위 안에서 <b>조건과 같은 값</b>이 몇 개인지 셉니다.</p>
+      <div class="tbl-wrap"><table class="table">
+        <thead><tr><th>예시 · 경영학과는 몇 명?</th><th>학번</th><th>이름</th><th>학과</th></tr></thead>
+        <tbody>
+          <tr><td>2</td><td>2401</td><td>김민지</td><td>경영</td></tr>
+          <tr><td>3</td><td>2402</td><td>이서준</td><td>컴퓨터공학</td></tr>
+          <tr><td>4</td><td>2403</td><td>박서연</td><td>경영</td></tr>
+          <tr><td>5</td><td>2404</td><td>최지훈</td><td>디자인</td></tr>
+          <tr><td>6</td><td>2405</td><td>한지우</td><td>경영</td></tr>
+        </tbody>
+      </table></div>
+      <div class="principle" style="font-size:16px;font-family:Consolas,monospace">=COUNTIF(C2:C6, "경영")</div>
+      <div class="cols">
+        <div class="mini"><span class="no">1</span><h4>범위</h4><p>학과 칸 (C2:C6)에서</p></div>
+        <div class="mini"><span class="no">2</span><h4>조건</h4><p>"경영"과 같은 칸을</p></div>
+        <div class="mini"><span class="no">3</span><h4>개수</h4><p>김민지 · 박서연 · 한지우 → 셈</p></div>
+      </div>
+      <div class="box ok"><span class="box-title">결과</span><b>3명</b></div>
+      <div class="box tip"><span class="box-title">📌 오늘 수업에서는</span>"이 행과 똑같은 행이 몇 개?" → 2개 이상이면 "중복"<br><code>=IF(COUNTIF($O$2:$O$101, O2)&gt;1, "중복", "")</code></div>
+
+      <h3>⑤ SUMIFS — 조건 맞는 것만 모아 더하기</h3>
+      <p>여러 조건을 <b>모두 만족하는 줄만</b> 골라 합계를 냅니다.</p>
+      <div class="tbl-wrap"><table class="table">
+        <thead><tr><th>예시 · 경영학과 2학년의 봉사시간 합계</th><th>이름</th><th>학과</th><th class="num">학년</th><th class="num">봉사시간</th></tr></thead>
+        <tbody>
+          <tr><td>2</td><td>김민지</td><td>경영</td><td class="num">2</td><td class="num">10</td></tr>
+          <tr><td>3</td><td>이서준</td><td>컴공</td><td class="num">2</td><td class="num">8</td></tr>
+          <tr><td>4</td><td>박서연</td><td>경영</td><td class="num">3</td><td class="num">6</td></tr>
+          <tr><td>5</td><td>최지훈</td><td>경영</td><td class="num">2</td><td class="num">4</td></tr>
+          <tr><td>6</td><td>한지우</td><td>디자인</td><td class="num">2</td><td class="num">12</td></tr>
+        </tbody>
+      </table></div>
+      <div class="principle" style="font-size:16px;font-family:Consolas,monospace">=SUMIFS(D2:D6, B2:B6,"경영", C2:C6,2)</div>
+      <div class="cols">
+        <div class="mini"><span class="no">1</span><h4>더할 칸</h4><p>봉사시간 (D열)</p></div>
+        <div class="mini"><span class="no">2</span><h4>조건 1</h4><p>학과가 "경영"</p></div>
+        <div class="mini"><span class="no">3</span><h4>조건 2</h4><p>학년이 2</p></div>
+        <div class="mini"><span class="no">4</span><h4>→ 둘 다 맞는 줄만</h4><p>김민지 · 최지훈</p></div>
+      </div>
+      <div class="box ok"><span class="box-title">결과</span>10 + 4 = <b>14시간</b></div>
+      <div class="box tip"><span class="box-title">📌 오늘 수업에서는</span>3월이면서 · 신구점이면서 · 판매인 매출액만 더하기 (W2)<br><code>=SUMIFS(H:H, C:C,"신구점", K:K,"판매", A:A,"&gt;="&amp;DATE(2026,3,1), …)</code></div>
     </section>
 
     <section class="card" id="file">
-      <h2><span class="num">04</span>실습 파일 살펴보기</h2>
+      <h2><span class="num">05</span>실습 파일 살펴보기</h2>
       <p class="lead"><b>AI_스마트엑셀_학생용_실습데이터.xlsx</b> &nbsp;·&nbsp; <a href="index.html#downloads">⬇ 파일 받으러 가기</a></p>
 
       <div class="tbl-wrap"><table class="table">

@@ -41,11 +41,11 @@
 
     <section class="card" id="prep">
       <h2><span class="num">01</span>작업 준비: 원본은 그대로, 복사본에서 작업</h2>
-      <p class="lead"><span class="chip time">실습 3분</span> <span class="sheetref">05 시트 · A1 붙여넣기 + M1~Q1 제목</span></p>
+      <p class="lead"><span class="chip time">실습 3분</span> <span class="sheetref">05 시트 · A1 붙여넣기 + M1~P1 제목</span></p>
       <ol class="steps">
         <li><b>02_매출원본 전체 선택</b><span><kbd>Ctrl</kbd>+<kbd>A</kbd> → <kbd>Ctrl</kbd>+<kbd>C</kbd></span></li>
         <li><b>05_정제데이터 A1 클릭</b><span><kbd>Ctrl</kbd>+<kbd>V</kbd></span></li>
-        <li><b>M1~Q1에 도우미 열 제목 입력</b><span>아래 표의 제목을 입력합니다.</span></li>
+        <li><b>M1~P1에 도우미 열 제목 입력</b><span>아래 표의 제목을 입력합니다.</span></li>
       </ol>
       <div class="tbl-wrap"><table class="table">
         <thead><tr><th>열</th><th>도우미 열 제목</th></tr></thead>
@@ -54,7 +54,6 @@
           <tr><td><strong>N</strong></td><td>매출검증</td></tr>
           <tr><td><strong>O</strong></td><td>중복키</td></tr>
           <tr><td><strong>P</strong></td><td>중복여부</td></tr>
-          <tr><td><strong>Q</strong></td><td>날짜변환</td></tr>
         </tbody>
       </table></div>
       <div class="box note">완료했으면 손을 들어주세요 — 전원 완료 후 다음으로 넘어갑니다.</div>
@@ -86,7 +85,7 @@
           <tr><td><strong>N</strong></td><td>매출검증</td><td>IF + COUNT</td><td><a href="#trap">IF 함정과 개선</a></td></tr>
           <tr><td><strong>O</strong></td><td>중복키</td><td>TEXTJOIN</td><td><a href="#dup">텍스트·중복</a></td></tr>
           <tr><td><strong>P</strong></td><td>중복여부</td><td>IF + COUNTIF</td><td><a href="#dup">텍스트·중복</a></td></tr>
-          <tr><td><strong>Q</strong></td><td>날짜변환</td><td>IFERROR · DATEVALUE · SUBSTITUTE</td><td><a href="session_3.html#clean2">PART 3 정제②</a></td></tr>
+          <tr><td><strong>A</strong></td><td>날짜변환</td><td>텍스트 나누기 · SUBSTITUTE</td><td><a href="session_3.html#clean2">PART 3 정제②</a></td></tr>
           <tr><td><strong>R~U</strong></td><td>표준화(임시)</td><td>XLOOKUP · COUNTIF · SUBSTITUTE</td><td><a href="session_3.html#clean3">PART 3 정제③</a></td></tr>
           <tr><td><strong>W2</strong></td><td>참고 합계</td><td>SUMIFS + DATE</td><td><a href="#w2">W2 합계</a></td></tr>
         </tbody>
@@ -111,7 +110,7 @@
 
       <div class="box warn">
         <span class="box-title">⚠️ 주의</span>
-        Excel 2021에는 <b>TEXTSPLIT · TEXTBEFORE · TEXTAFTER</b>가 없습니다 → <b>버전을 꼭 쓰세요.</b><br>
+        Excel 2024에는 <b>GROUPBY · PIVOTBY · REGEX</b> 함수가 없습니다 → <b>버전을 꼭 쓰세요.</b><br>
         이 5개가 빠지면 AI가 없는 함수를 주거나, 열을 틀리게 씁니다.
       </div>
     </section>
@@ -281,21 +280,10 @@
     </section>
 
     <section class="card" id="dup">
-      <h2><span class="num">10</span>텍스트 정리 · 중복 찾기</h2>
-      <p class="lead"><span class="chip time">시연 + 실습</span> <span class="sheetref">05 시트 · O열(중복키) · P열(중복여부)</span></p>
+      <h2><span class="num">10</span>중복 찾기: 똑같은 행이 있나?</h2>
+      <p class="lead"><span class="chip time">실습</span> <span class="sheetref">05 시트 · O열(중복키) · P열(중복여부)</span></p>
 
-      <h3>텍스트 정리: TRIM의 한계 <span class="role ins">강사 시연</span></h3>
-      <div class="tbl-wrap"><table class="table">
-        <thead><tr><th>수식</th><th>"카페 라떼" 결과</th></tr></thead>
-        <tbody>
-          <tr><td><code>=TRIM(E2)</code></td><td>카페 라떼 <span class="bad">(실패)</span></td></tr>
-          <tr><td><code>=SUBSTITUTE(E2," ","")</code></td><td>카페라떼 <span class="good">(성공)</span></td></tr>
-        </tbody>
-      </table></div>
-      <p>TRIM은 앞뒤 공백과 겹친 공백만 지웁니다.</p>
-      <div class="box tip"><span class="box-title">더 좋은 방법</span>명칭은 코드로 Master에서 가져오기 (<a href="session_3.html#clean3">PART 3</a>)</div>
-
-      <h3>중복 찾기: 한 행을 문자열 하나로 <span class="role stu">학생 실습</span></h3>
+      <h3>한 행을 문자열 하나로 <span class="role stu">학생 실습</span></h3>
       <div class="prompt formula">
         <div class="prompt-head"><span class="label">수식 · O2 중복키 <span class="lv">TEXTJOIN</span></span><button class="copy-btn" onclick="copyPrompt(this)">복사</button></div>
         <pre>=TEXTJOIN("|",FALSE,A2:L2)</pre>
@@ -388,27 +376,24 @@
     </section>
 
     <section class="card" id="cards">
-      <h2><span class="num">14</span>함수 카드 14: 보지 않고 설명할 수 있으면 마스터</h2>
+      <h2><span class="num">14</span>함수 카드: 보지 않고 설명할 수 있으면 마스터 11개</h2>
       <p class="lead">주인공 4개 <b>IF · XLOOKUP · COUNTIF · SUMIFS</b> &nbsp;|&nbsp; 분류: 판정 · 찾기 · 정리 · 합계</p>
       <div class="tbl-wrap"><table class="table">
         <thead><tr><th>함수</th><th>한 문장 비유</th><th>형식</th><th>오늘의 예</th><th>흔한 실수</th></tr></thead>
         <tbody>
           <tr><td><strong>IF</strong></td><td>"~이면 A, 아니면 B" 갈림길</td><td><code>IF(조건, 참, 거짓)</code></td><td>매출 판정: 09 D6, 05 N2</td><td>따옴표 없이 정상 입력 → #NAME?</td></tr>
           <tr><td><strong>COUNT</strong></td><td>숫자인 칸만 세는 출석 체크</td><td><code>COUNT(범위)</code></td><td>빈칸·글자 숫자 감지: 05 N2</td><td>글자 숫자도 셀 거라고 착각</td></tr>
-          <tr><td><strong>ISNUMBER</strong></td><td>"이게 숫자야?" 예/아니오</td><td><code>ISNUMBER(값)</code></td><td>진짜 날짜인지: Q2, 조건부 서식</td><td>글자 날짜도 TRUE일 거라 착각</td></tr>
+          <tr><td><strong>ISNUMBER</strong></td><td>"이게 숫자야?" 예/아니오</td><td><code>ISNUMBER(값)</code></td><td>날짜가 숫자인지: 조건부 서식</td><td>글자 날짜도 TRUE일 거라 착각</td></tr>
           <tr><td><strong>OR · NOT</strong></td><td>하나라도 맞으면 참 / 반대로 뒤집기</td><td><code>OR(조건1, …)</code> · <code>NOT(조건)</code></td><td>문제 행 칠하기: 조건부 서식</td><td>AND와 혼동, 괄호 위치 실수</td></tr>
           <tr><td><strong>XLOOKUP</strong></td><td>학번으로 이름 찾기</td><td><code>XLOOKUP(값, 찾을범위, 가져올범위, 없을 때)</code></td><td>B20, M2, R2~T2</td><td>범위 고정(<kbd>F4</kbd>) 빠뜨림</td></tr>
           <tr><td><strong>COUNTIF</strong></td><td>"나랑 똑같은 사람 몇 명?"</td><td><code>COUNTIF(범위, 조건)</code></td><td>중복 P2, Master 확인 S2</td><td>범위를 고정하지 않음</td></tr>
-          <tr><td><strong>SUBSTITUTE</strong></td><td>찾아 바꾸기의 함수 버전</td><td><code>SUBSTITUTE(텍스트, 바꿀 것, 새 것)</code></td><td>공백 제거 S2, 날짜 Q2</td><td>따옴표 사이 공백 한 칸 빼먹음</td></tr>
-          <tr><td><strong>TRIM</strong></td><td>앞뒤 공백 정리</td><td><code>TRIM(텍스트)</code></td><td>한계 시연</td><td>가운데 공백도 지울 거라 착각</td></tr>
+          <tr><td><strong>SUBSTITUTE</strong></td><td>찾아 바꾸기의 함수 버전</td><td><code>SUBSTITUTE(텍스트, 바꿀 것, 새 것)</code></td><td>공백 제거 S2</td><td>따옴표 사이 공백 한 칸 빼먹음</td></tr>
           <tr><td><strong>TEXTJOIN</strong></td><td>여러 칸을 한 줄로 이어 붙이기</td><td><code>TEXTJOIN(구분자, 빈칸무시, 범위)</code></td><td>중복키 O2</td><td>TRUE로 해서 빈칸 위치 정보가 사라짐</td></tr>
-          <tr><td><strong>DATEVALUE</strong></td><td>날짜처럼 생긴 글자 → 진짜 날짜</td><td><code>DATEVALUE(텍스트)</code></td><td>텍스트 날짜 변환 Q2</td><td>PC 지역 설정에 따라 실패 가능</td></tr>
-          <tr><td><strong>IFERROR</strong></td><td>오류 나면 대신 이걸 보여줘</td><td><code>IFERROR(수식, 대체값)</code></td><td>변환 실패 시 확인필요 Q2</td><td>진짜 문제를 숨기는 데 남용</td></tr>
           <tr><td><strong>SUMIFS</strong></td><td>조건 맞는 영수증만 모아 합계</td><td><code>SUMIFS(더할 범위, 조건 범위1, 조건1, …)</code></td><td>09 M33, 05 W2</td><td>조건 칸의 글자 때문에 0</td></tr>
           <tr><td><strong>DATE</strong></td><td>연·월·일로 진짜 날짜 만들기</td><td><code>DATE(연, 월, 일)</code></td><td>SUMIFS 날짜 조건 W2</td><td>"&gt;="와 DATE를 &amp;로 안 붙임</td></tr>
         </tbody>
       </table></div>
-      <p class="muted">※ OR와 NOT은 한 행으로 묶어 표기했습니다 (13행 = 함수 14개).</p>
+      <p class="muted">※ OR와 NOT은 한 행으로 묶어 표기했습니다 (10행 = 함수 11개).</p>
     </section>
 
     <div class="pager" id="pager"></div>

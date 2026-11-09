@@ -109,7 +109,7 @@ function renderSessionGrid(){
       <div class="part-top"><div class="part-no"><small>LIBRARY</small>${PROMPTS.length + FORMULAS.length + FUNCS.length}</div><span class="tool-tag">프롬프트 · 수식 · 함수</span></div>
       <h3>프롬프트·함수 라이브러리</h3>
       <p class="desc">강의에서 쓰는 프롬프트 ${PROMPTS.length}개, 수식 ${FORMULAS.length}개, 함수 카드를 한곳에 모았습니다. 검색하고, 걸러서, 버튼 한 번으로 복사하세요.</p>
-      <div class="part-foot"><span class="count">프롬프트 <b>${PROMPTS.length}</b> · 수식 <b>${FORMULAS.length}</b> · 함수 <b>14</b></span><span class="go">모아보기 →</span></div>
+      <div class="part-foot"><span class="count">프롬프트 <b>${PROMPTS.length}</b> · 수식 <b>${FORMULAS.length}</b> · 함수 <b>11</b></span><span class="go">모아보기 →</span></div>
     </a>`;
   grid.innerHTML = cards + lib;
 }
