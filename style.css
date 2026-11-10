@@ -29,7 +29,7 @@ a{color:inherit}
   background:radial-gradient(1200px 500px at 85% -10%,rgba(212,180,131,.22),transparent 60%),
              radial-gradient(800px 400px at -10% 110%,rgba(46,90,160,.35),transparent 60%),
              linear-gradient(160deg,#0b1628 0%,#14284a 55%,#0f1f3a 100%);
-  padding:84px 0 120px}
+  padding:64px 0 100px}
 .hero::after{content:"";position:absolute;inset:0;pointer-events:none;
   background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
   background-size:56px 56px;mask-image:linear-gradient(180deg,#000 30%,transparent 95%);-webkit-mask-image:linear-gradient(180deg,#000 30%,transparent 95%)}
@@ -46,7 +46,7 @@ a{color:inherit}
 @media(max-width:640px){.org-logo img{height:28px}.org-logo{padding:7px 13px}}
 .kicker{display:inline-flex;align-items:center;gap:10px;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-2);font-weight:600}
 .kicker::before{content:"";width:28px;height:1px;background:var(--gold-2)}
-.hero h1{font-family:var(--serif);font-weight:900;font-size:clamp(34px,5.6vw,62px);line-height:1.22;margin:22px 0 14px;letter-spacing:-.01em}
+.hero h1{font-family:var(--serif);font-weight:900;font-size:clamp(32px,5.2vw,56px);line-height:1.22;margin:22px 0 14px;letter-spacing:-.01em}
 .hero h1 em{font-style:normal;background:linear-gradient(90deg,#e9d2a6,#c99d5f);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero .sub{font-size:clamp(17px,2.1vw,21px);color:rgba(255,255,255,.82);margin:0 0 30px;max-width:680px}
 .hero-chips{display:flex;flex-wrap:wrap;gap:10px}
@@ -329,3 +329,9 @@ footer strong{color:var(--text)}
 @media(max-width:860px){.fgrid{grid-template-columns:1fr}}
 @media(max-width:640px){.tbtn{flex:1 1 100%;padding:12px}.fdl{margin:0 14px 12px}.fcard .prompt{margin:0 14px 6px}.fname{font-size:23px!important}}
 .pcard{scroll-margin-top:calc(var(--nav-h) + 16px)}
+
+/* index: "강의 목차" 제목을 Course 라벨 옆 한 줄로, 남색 배경 위에서 읽히도록 */
+.page-index #sessions .sec-head>div{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.page-index #sessions .sec-head h2{margin:0;color:#fff}
+.page-index #sessions .sec-head p{color:rgba(255,255,255,.72)}
+@media(max-width:640px){.page-index #sessions .sec-head p{display:none}}
